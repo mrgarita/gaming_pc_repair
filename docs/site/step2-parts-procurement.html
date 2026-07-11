@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>step2 部品調達 — ゲーミングPC復活ログ</title>
+<meta name="description" content="AM4 マザーボードの選定・リテール品と OEM 版の違い・交換方針と候補部品リスト（step2）">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <p class="site-header__title"><a href="index.html">ゲーミングPC復活ログ</a></p>
+    <span class="site-header__tag">GAMING PC REPAIR LOG</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero__inner">
+    <p class="silk silk--onboard">STEP 2 — LOG 2026-07-11</p>
+    <h1 class="hero__title">部品調達 — AM4 マザーボードの選定と交換方針</h1>
+    <p class="hero__lead">
+      予備部品がなく電源の事前切り分けができないため、「最有力容疑のマザーボードを
+      先に交換し、直らなければ電源」という二段構えで進める。CPU を流用するための
+      規格（AM4）の整理と、リテール品を選ぶ理由、購入候補、交換後の Windows
+      再認証手順をまとめる。
+    </p>
+  </div>
+</section>
+
+<main class="main">
+
+  <section class="section">
+    <h2 class="section__heading">交換方針 — 二段構え</h2>
+    <ol>
+      <li><strong>第 1 段：B550 リテールのマザーボードに交換する。</strong>step1 の切り分けで容疑が最も濃く、OEM マザーボード＋BIOS 起因の懸念も同時に解消できるため。CPU・メモリ・GPU・SSD・電源・ケースはすべて流用する。</li>
+      <li><strong>第 2 段：直らなければ電源を交換する。</strong>次点の容疑。マザー交換後も CPU・DRAM LED 点灯 → 再起動ループが続く場合に購入する（先走って買わない）。</li>
+    </ol>
+    <p class="note">
+      リスクの整理：電源が真犯人だった場合、第 1 段のマザー代が「先行投資」になる。
+      ただしその場合も OEM 板からリテール板への置き換え自体は無駄にならない
+      （BIOS 更新・保証・将来の切り分けやすさが手に入る）。
+    </p>
+  </section>
+
+  <section class="section">
+    <h2 class="section__heading">なぜ「AM4」のマザーボードなのか</h2>
+    <p>
+      AM4 は AMD の CPU ソケット（CPU の差し込み口）の規格名。CPU とマザーボードは
+      ソケット規格が一致しないと物理的に取り付けられない。手持ちの Ryzen 7 3700X は
+      AM4 対応 CPU なので、CPU を流用するには同じ AM4 ソケットのマザーボードを選ぶ。
+      現行最新の Ryzen（7000〜9000 世代）は AM5 という別規格で、3700X は載らない。
+    </p>
+    <figure class="figure">
+      <svg viewBox="0 0 760 300" role="img" aria-label="手持ちの Ryzen 7 3700X は Socket AM4 のマザーボードに適合し、Socket AM5 には取り付けられない">
+        <!-- 手持ち CPU -->
+        <g>
+          <rect x="40" y="100" width="190" height="100" rx="4" fill="#143528"/>
+          <rect x="56" y="116" width="42" height="42" rx="2" fill="#d9a06b"/>
+          <text x="112" y="136" class="svg-silk" font-size="10" fill="#d9a06b">手持ち・流用する</text>
+          <text x="112" y="158" font-size="15" fill="#e9efe9">Ryzen 7 3700X</text>
+          <text x="56" y="184" class="svg-silk" font-size="10" fill="#a7b4a7">Socket AM4 対応 CPU</text>
+        </g>
+
+        <!-- AM4 への接続（適合） -->
+        <line x1="230" y1="130" x2="420" y2="85" stroke="#b4632c" stroke-width="3"/>
+        <circle cx="325" cy="107" r="12" fill="#2f9e63"/>
+        <text x="325" y="112" font-size="13" fill="#ffffff" text-anchor="middle">○</text>
+
+        <!-- AM5 への接続（不適合） -->
+        <line x1="230" y1="170" x2="420" y2="215" stroke="#b9c2ba" stroke-width="3" stroke-dasharray="7 6"/>
+        <circle cx="325" cy="193" r="12" fill="#e5484d"/>
+        <text x="325" y="198" font-size="13" fill="#ffffff" text-anchor="middle">×</text>
+
+        <!-- Socket AM4 -->
+        <g>
+          <rect x="420" y="40" width="300" height="90" rx="4" fill="#ffffff" stroke="#2f9e63" stroke-width="2.5"/>
+          <text x="436" y="68" font-size="15" fill="#20241f">Socket AM4 — 適合</text>
+          <text x="436" y="90" class="svg-silk" font-size="10" fill="#5c655d">Ryzen 1000〜5000 世代用（2016〜）</text>
+          <text x="436" y="108" class="svg-silk" font-size="10" fill="#2f9e63">チップセット：X570 / B550 / A520 など</text>
+        </g>
+
+        <!-- Socket AM5 -->
+        <g>
+          <rect x="420" y="170" width="300" height="90" rx="4" fill="#f0f2ee" stroke="#b9c2ba" stroke-width="2"/>
+          <text x="436" y="198" font-size="15" fill="#5c655d">Socket AM5 — 載らない</text>
+          <text x="436" y="220" class="svg-silk" font-size="10" fill="#5c655d">Ryzen 7000〜9000 世代用（2022〜）</text>
+          <text x="436" y="238" class="svg-silk" font-size="10" fill="#e5484d">3700X は物理的に取り付け不可</text>
+        </g>
+      </svg>
+      <figcaption>
+        図1：ソケット規格と CPU 世代の対応（オリジナルの模式図）。CPU を流用する以上、選択肢は AM4 一択になる。
+      </figcaption>
+    </figure>
+  </section>
+
+  <section class="section">
+    <h2 class="section__heading">チップセットは B550 を選ぶ</h2>
+    <p>
+      同じ AM4 でも、基板上の制御チップ「チップセット」でグレードが分かれる。
+      元の PC が X570 だからといって X570 に戻す必要はない。
+    </p>
+    <table class="spec-table">
+      <tbody>
+        <tr><th>X570</th><td>上位（元の板と同じ）。3700X に対応するが高価で、2026 年現在は新品の入手性が悪い</td></tr>
+        <tr><th>B550</th><td><strong>中位・定番。今回の本命。</strong>3700X（Ryzen 3000 世代）を標準サポートし、新品が約 12,000〜15,000 円で流通中</td></tr>
+        <tr><th>A520</th><td>入門。対応はするが拡張性が低く、価格差も小さいので選ぶ理由が薄い</td></tr>
+      </tbody>
+    </table>
+    <p class="note">
+      購入前の確認：製品ページの「対応 CPU リスト」に Ryzen 7 3700X（Matisse）が
+      あることだけ確認する。B550 は発売時から Ryzen 3000 対応のため、基本的に問題ない。
+    </p>
+  </section>
+
+  <section class="section">
+    <h2 class="section__heading">リテール品と OEM 版の違い</h2>
+    <p>
+      リテール品とは、一般小売向けに単品販売される正規パッケージ品のこと。
+      いまの PC に入っているのは「OEM 版」——メーカー（マウスコンピューター）が
+      自社 PC 組み込み用に調達した特注版で、BIOS の管理・提供はメーカー側にあり、
+      単品での入手や単品保証はできない。
+    </p>
+    <p>
+      リテール品に交換すると、(1) ASRock 等のメーカーから BIOS 更新が直接提供される、
+      (2) 店舗・代理店の単品保証が付く、(3) step1 で「考慮」に挙げた
+      OEM マザーボード＋BIOS 起因の不具合という懸念ごと解消できる、という利点がある。
+    </p>
+  </section>
+
+  <section class="section">
+    <h2 class="section__heading">購入候補リスト（2026-07 時点）</h2>
+    <table class="spec-table">
+      <tbody>
+        <tr>
+          <th>マザーボード<br>（第一候補・ATX）</th>
+          <td>ASRock B550 Phantom Gaming 4 — 約 12,000〜15,000 円。元の OEM 板（X570 Phantom Gaming 4 ベース）と同系列のリテール品で、コネクタ配置が近く移行が分かりやすい</td>
+        </tr>
+        <tr>
+          <th>マザーボード<br>（代替・MicroATX）</th>
+          <td>MSI PRO B550M-P — 税込 15,131 円（2026-06 発売・Amazon 限定）。発売が新しく供給が安定。MicroATX でも現ケースにネジ穴互換で搭載可</td>
+        </tr>
+        <tr>
+          <th>CPU グリス</th>
+          <td>定番品で約 1,000 円。クーラー再取り付け時の塗り直しに<strong>必須</strong>（現在は旧グリスのまま仮組み状態）</td>
+        </tr>
+        <tr>
+          <th>ATX 電源（第 2 段・保留）</th>
+          <td>650W 以上で約 8,000 円〜。マザー交換で直らなかった場合にのみ購入する</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      出典：
+      <a href="https://kakaku.com/pc/motherboard/itemlist.aspx?pdf_Spec116=10">価格.com の B550 一覧</a>／
+      <a href="https://www.gdm.or.jp/pressrelease/2026/0626/641012">エルミタージュ秋葉原（MSI PRO B550M-P 発売記事）</a>／
+      <a href="https://shop.tsukumo.co.jp/goods/2021012800011">ツクモ（3700X ＋ B550 Phantom Gaming 4 セット）</a>／
+      <a href="https://www.ark-pc.co.jp/search/?category=c13&amp;p5=s13180&amp;p6=w13091">ark の B550 在庫一覧</a>
+    </p>
+  </section>
+
+  <section class="section">
+    <h2 class="section__heading">Windows 11 の再認証手順（マザー交換後）</h2>
+    <p>
+      OS は Windows 10 Home からの無償アップグレード版 Windows 11 で、
+      Microsoft アカウントに本機を紐付け済み。デジタルライセンスがアカウント側に
+      記録されているため、次の手順で再認証できる見込みが高い。
+    </p>
+    <ol>
+      <li>マザーボード交換後、Windows 11 を起動してインターネットに接続する</li>
+      <li>「設定 → システム → ライセンス認証」を開く</li>
+      <li>認証エラーが出ている場合は「トラブルシューティング」を実行する</li>
+      <li>「このデバイスのハードウェアを最近変更しました」を選択する</li>
+      <li>Microsoft アカウントでサインインし、デバイス一覧から本機を選んで再認証する</li>
+    </ol>
+    <p class="note">
+      Microsoft は再認証を 100% 保証していないが、アカウント紐付けがある場合は
+      通るのが通例。通らなかった場合は画面の案内（サポート窓口）に従う。
+    </p>
+  </section>
+
+  <section class="section">
+    <h2 class="section__heading">任意：電源の簡易チェック（クリップテスト）</h2>
+    <p>
+      部品を買う前に無料でできる唯一の電源チェック。「最低限起動するか」だけを見る
+      簡易テストで、<strong>回った＝電源は正常、とまでは言えない</strong>点に注意
+      （負荷時だけ落ちる不良は検出できない）。
+    </p>
+    <ol>
+      <li>電源ケーブルをコンセントから抜き、電源ユニット背面のスイッチを OFF にする</li>
+      <li>マザーボードから 24 ピンコネクタを外す</li>
+      <li>24 ピンコネクタの PS_ON（緑線）と COM（黒線）を、伸ばしたゼムクリップで短絡する</li>
+      <li>電源ケーブルを差し、背面スイッチを ON → 電源ファンが回るか確認する</li>
+    </ol>
+    <ul class="check-list">
+      <li><span class="led led--red" aria-hidden="true"></span>ファンが回らない → 電源のクロ確定。第 2 段を繰り上げて電源から交換する</li>
+      <li><span class="led led--amber" aria-hidden="true"></span>ファンが回る → 最低限は動く。ただしシロ確定ではないので方針は変えない</li>
+    </ul>
+    <p class="note">
+      安全上の注意：作業は必ず通電を切ってから行い、電源ユニットの筐体は開けないこと
+      （内部コンデンサは通電を切っても高電圧を保持している）。
+    </p>
+  </section>
+
+  <nav class="page-nav">
+    <a href="step1-current-status.html">← STEP 1 現状把握</a>
+    <span class="silk">次：STEP 3 組み立て・検証（部品到着後）</span>
+  </nav>
+
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <p>ゲーミングPC復活ログ — 修理の進行に合わせて随時更新する備忘録。掲載している図はすべてオリジナルの模式図。</p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -5,11 +5,12 @@
 
 ## リポジトリの状態
 
-step1（現状把握）完了・step2（部品調達）準備中。備忘録サイト `docs/site/` の初版
-（`index.html`・`step1-current-status.html`・`style.css`）を作成済み。「正」となる
-ファイルは `project.txt`（プロジェクト全体の手順）と `docs/` 直下の 2 文書
-（`PCトラブル経過まとめ.html`＝故障経過と切り分け状況、`G-Tune_HN-A_spec.html`＝
-対象 PC の製品仕様）。
+step2（部品調達）進行中——交換方針は「B550 リテールのマザーボード先行交換 →
+直らなければ電源」の二段構えで文書化済み、購入判断はユーザー待ち。備忘録サイト
+`docs/site/`（`index.html`・`step1-current-status.html`・`step2-parts-procurement.html`・
+`style.css`）を運用中。「正」となるファイルは `project.txt`（プロジェクト全体の手順）と
+`docs/` 直下の 2 文書（`PCトラブル経過まとめ.html`＝故障経過と切り分け状況、
+`G-Tune_HN-A_spec.html`＝対象 PC の製品仕様）。
 
 ## プロダクト概要
 
@@ -64,5 +65,8 @@ step3 組み立て・動作検証（動作しなければ step1 へ戻る）→ 
   - CPU: Ryzen 7 3700X／GPU: RTX 2070 SUPER／メモリ: DDR4-3200 16GB×2
   - マザーボード: ASRock X570 Phantom Gaming 4 ベース（OEM）。BIOS は P5.80 へ更新済み
   - 電源: 800W 80PLUS Titanium
+  - OS: Windows 11（購入時の Windows 10 Home から無償アップグレード）。
+    Microsoft アカウントに本機を紐付け済み（マザー交換後の再認証はこれを使う）
 - 現時点の切り分け状況：マザーボード故障の可能性が最も高く、次点で電源ユニット不良。
-  CPU 故障の可能性は比較的低いが否定不可。CPU・CPUクーラーは未着脱
+  CPU はクーラー着脱・ソケット目視で異常なし（2026-07-11、グリス未再塗布のまま仮組み）。
+  予備部品がなく電源の事前切り分けは不可

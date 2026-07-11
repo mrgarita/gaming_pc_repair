@@ -47,6 +47,7 @@
         <tr><th>SSD（既存）</th><td>M.2 NVMe 1TB — Windows 入り（M2_1 スロット）</td></tr>
         <tr><th>SSD（増設）</th><td>Crucial P310 1TB — 今回の増設品</td></tr>
         <tr><th>電源</th><td>800W 80PLUS Titanium</td></tr>
+        <tr><th>OS</th><td>Windows 11（購入時の Windows 10 Home から無償アップグレード）・Microsoft アカウント紐付け済み</td></tr>
       </tbody>
     </table>
   </section>
@@ -81,8 +82,12 @@
       <li><span class="led led--green" aria-hidden="true"></span>CMOS クリア</li>
       <li><span class="led led--green" aria-hidden="true"></span>メモリ 1 枚ずつの確認（A2 スロット）</li>
       <li><span class="led led--green" aria-hidden="true"></span>SSD 全取り外しでの起動確認</li>
-      <li><span class="led" aria-hidden="true"></span>CPU・CPU クーラーの着脱（ソケット目視・グリス再塗布）— <strong>未実施</strong></li>
+      <li><span class="led led--green" aria-hidden="true"></span>CPU・CPU クーラーの着脱とソケット目視（2026-07-11）— ピン曲がり・焼損なし</li>
     </ul>
+    <p class="note">
+      クーラーはグリスを再塗布せずそのまま再装着している（手持ちがないため）。起動確認
+      程度なら問題ないが、復活後に常用を始める前には塗り直しが必要。グリスは調達リスト入り。
+    </p>
   </section>
 
   <section class="section">
@@ -116,7 +121,7 @@
         <rect x="120" y="140" width="120" height="120" fill="#ffffff" stroke="#eba117" stroke-width="2.5"/>
         <text x="136" y="192" font-size="14" fill="#20241f">CPU</text>
         <text x="136" y="212" class="svg-silk" font-size="10" fill="#5c655d">Ryzen 7 3700X</text>
-        <text x="136" y="230" class="svg-silk" font-size="10" fill="#eba117">容疑△ 未検証</text>
+        <text x="136" y="230" class="svg-silk" font-size="10" fill="#eba117">容疑△ 目視異常なし</text>
 
         <!-- メモリスロット（シロ寄り） -->
         <g>
@@ -191,7 +196,7 @@
       <li>
         <span class="led led--amber" aria-hidden="true"></span>
         <span class="silk">容疑△</span>
-        <span><strong>CPU 故障。</strong>可能性は比較的低いが、クーラー未着脱のため否定できていない。</span>
+        <span><strong>CPU 故障。</strong>クーラーを外しての目視では異常なし（2026-07-11）。電気的な故障の可能性だけが残るが、可能性は低い。</span>
       </li>
       <li>
         <span class="led" aria-hidden="true"></span>
@@ -204,19 +209,18 @@
   <section class="section">
     <h2 class="section__heading">次のアクション（step2 へ）</h2>
     <ol>
-      <li><strong>無料でできる切り分けを先に消化する。</strong>CPU クーラーを外し、ソケットのピン曲がり・焼損を目視確認する（外すと CPU グリスの再塗布が必要になるため、グリスは調達リストに入れる）。</li>
-      <li><strong>電源のシロクロ判定。</strong>動作確認済みの別電源を用意できれば、購入前に電源を切り分けられる。</li>
-      <li><strong>交換部品の第一候補は AM4 マザーボード（X570 / B550、ATX）。</strong>リテール品に替えれば、OEM マザーボード＋BIOS 起因の懸念も同時に解消できる。</li>
+      <li><strong>無料でできる切り分けは消化済み。</strong>CPU クーラーの着脱と目視は実施し異常なし（2026-07-11）。予備部品がないため、電源の事前切り分けは不可と判明した。</li>
+      <li><strong>交換方針は「B550 リテールのマザーボードを先行交換 → 直らなければ電源」の二段構え。</strong>規格（AM4）の解説・候補部品・Windows 再認証の手順は <a href="step2-parts-procurement.html">step2 部品調達</a> にまとめた。</li>
     </ol>
     <p class="note">
-      注意：Windows 10 は OEM ライセンスのため、マザーボード交換後に再認証が必要になる
-      可能性が高い。Microsoft アカウントとの紐付け有無を確認しておくこと。
+      Windows 11（Windows 10 からの無償アップグレード）は Microsoft アカウントに
+      紐付け済みと確認できた。マザーボード交換後の再認証手順は step2 のページに記載。
     </p>
   </section>
 
   <nav class="page-nav">
     <a href="index.html">← トップへ戻る</a>
-    <span class="silk">次：STEP 2 部品調達（準備中）</span>
+    <a href="step2-parts-procurement.html">次：STEP 2 部品調達 →</a>
   </nav>
 
 </main>
