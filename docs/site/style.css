@@ -1,0 +1,389 @@
+/* ==========================================================================
+   ゲーミングPC復活ログ 共通スタイル
+   モチーフ：マザーボード基板（基板緑・銅配線・シルク印刷ラベル・診断LED）
+   外部アセットなし（ローカル file:// でも GitHub Pages でも動作する）
+   ========================================================================== */
+
+:root {
+  /* パレット */
+  --board: #143528;        /* 基板緑（ヘッダー・フッター） */
+  --board-deep: #0d2419;   /* 基板緑の陰 */
+  --copper: #b4632c;       /* 銅配線（アクセント・リンク） */
+  --copper-soft: #d9a06b;  /* 銅の淡色（基板上の配線） */
+  --paper: #f7f7f3;        /* 地の紙（冷白） */
+  --panel: #ffffff;        /* パネル面 */
+  --ink: #20241f;          /* 墨 */
+  --ink-soft: #5c655d;     /* 補足文字 */
+  --line: #d8ddd5;         /* 罫線 */
+  --led-red: #e5484d;      /* LED：異常・容疑大 */
+  --led-amber: #eba117;    /* LED：注意・容疑中 */
+  --led-green: #2f9e63;    /* LED：正常・シロ */
+  --led-off: #b9c2ba;      /* LED：消灯・未検証 */
+
+  --font-body: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic Medium",
+               "Yu Gothic", Meiryo, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Mono", Consolas, "Courier New", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.85;
+}
+
+a { color: var(--copper); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--board); }
+:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
+
+/* --------------------------------------------------------------------------
+   ヘッダー（基板面）
+   -------------------------------------------------------------------------- */
+
+.site-header {
+  background: linear-gradient(160deg, var(--board), var(--board-deep));
+  color: #e9efe9;
+  border-bottom: 3px solid var(--copper);
+}
+
+.site-header__inner {
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 1rem;
+}
+
+.site-header__title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.site-header__title a { color: inherit; text-decoration: none; }
+
+.site-header__tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: var(--copper-soft);
+}
+
+/* --------------------------------------------------------------------------
+   シルク印刷風ラベル（eyebrow）・メタ表記
+   -------------------------------------------------------------------------- */
+
+.silk {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+}
+
+.silk--onboard { color: var(--copper-soft); }
+
+/* --------------------------------------------------------------------------
+   診断LED（シグネチャ要素）
+   -------------------------------------------------------------------------- */
+
+.led {
+  display: inline-block;
+  width: 0.62em;
+  height: 0.62em;
+  border-radius: 50%;
+  background: var(--led-off);
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 12%);
+  vertical-align: 0.05em;
+}
+
+.led--red   { background: var(--led-red);   box-shadow: 0 0 6px 1px rgb(229 72 77 / 55%); }
+.led--amber { background: var(--led-amber); box-shadow: 0 0 6px 1px rgb(235 161 23 / 50%); }
+.led--green { background: var(--led-green); box-shadow: 0 0 6px 1px rgb(47 158 99 / 45%); }
+
+/* 症状の再現：数秒点灯 → 短く消灯（再起動ループ）。CPU・DRAM は同時点灯 */
+@keyframes led-reboot-cycle {
+  0%, 78% { opacity: 1; }
+  84%, 96% { opacity: 0.18; }
+  100% { opacity: 1; }
+}
+
+.led--cycle { animation: led-reboot-cycle 4.5s steps(1, end) infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .led--cycle { animation: none; }
+}
+
+/* 機体ステータスパネル（ヒーロー内） */
+.status-board {
+  background: var(--board-deep);
+  border: 1px solid rgb(217 160 107 / 35%);
+  border-radius: 4px;
+  padding: 0.9rem 1.1rem;
+  display: inline-block;
+}
+
+.status-board__title {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  color: var(--copper-soft);
+}
+
+.status-board__leds {
+  display: flex;
+  gap: 1.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.status-board__leds li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: #cfd8cf;
+}
+
+.status-board__leds .led { width: 0.8em; height: 0.8em; }
+
+.status-board__note {
+  margin: 0.6rem 0 0;
+  font-size: 0.78rem;
+  color: #a7b4a7;
+}
+
+/* --------------------------------------------------------------------------
+   ヒーロー
+   -------------------------------------------------------------------------- */
+
+.hero {
+  background: linear-gradient(160deg, var(--board), var(--board-deep));
+  color: #e9efe9;
+  padding: 2.6rem 1.25rem 2.8rem;
+}
+
+.hero__inner { max-width: 60rem; margin: 0 auto; }
+
+.hero__title {
+  margin: 0.4rem 0 0.8rem;
+  font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.35;
+}
+
+.hero__lead {
+  max-width: 38rem;
+  margin: 0 0 1.6rem;
+  font-size: 0.95rem;
+  color: #c3cec3;
+}
+
+/* --------------------------------------------------------------------------
+   本文レイアウト
+   -------------------------------------------------------------------------- */
+
+.main { max-width: 60rem; margin: 0 auto; padding: 2.2rem 1.25rem 3rem; }
+
+.section { margin: 0 0 2.6rem; }
+
+/* 見出し：銅配線の下線＋ヴィア（端子）ドット */
+.section__heading {
+  position: relative;
+  margin: 0 0 1.1rem;
+  padding-bottom: 0.55rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid var(--copper);
+}
+
+.section__heading::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--copper);
+}
+
+.section p { max-width: 44rem; }
+
+.note {
+  max-width: 44rem;
+  padding: 0.7rem 1rem;
+  border-left: 3px solid var(--led-amber);
+  background: #fdf6e7;
+  border-radius: 0 3px 3px 0;
+  font-size: 0.9rem;
+}
+
+/* --------------------------------------------------------------------------
+   仕様テーブル（スペックシート風）
+   -------------------------------------------------------------------------- */
+
+.spec-table {
+  width: 100%;
+  max-width: 44rem;
+  border-collapse: collapse;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  font-size: 0.92rem;
+}
+
+.spec-table th,
+.spec-table td { padding: 0.55rem 0.9rem; border-bottom: 1px solid var(--line); text-align: left; }
+
+.spec-table tr:last-child th,
+.spec-table tr:last-child td { border-bottom: none; }
+
+.spec-table th {
+  width: 11rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: var(--ink-soft);
+  background: #f0f2ee;
+}
+
+/* --------------------------------------------------------------------------
+   タイムライン（経過）：LED 状態付き
+   -------------------------------------------------------------------------- */
+
+.timeline { list-style: none; margin: 0; padding: 0; max-width: 44rem; counter-reset: tl; }
+
+.timeline li {
+  counter-increment: tl;
+  position: relative;
+  padding: 0.65rem 0.9rem 0.65rem 3.1rem;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-top: none;
+}
+
+.timeline li:first-child { border-top: 1px solid var(--line); }
+
+.timeline li::before {
+  content: counter(tl, decimal-leading-zero);
+  position: absolute;
+  left: 0.85rem;
+  top: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+.timeline .led { margin-right: 0.45rem; }
+
+.timeline__state {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  margin-right: 0.5rem;
+  color: var(--ink-soft);
+}
+
+/* --------------------------------------------------------------------------
+   チェックリスト・容疑度リスト
+   -------------------------------------------------------------------------- */
+
+.check-list,
+.suspect-list { list-style: none; margin: 0; padding: 0; max-width: 44rem; }
+
+.check-list li,
+.suspect-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px dashed var(--line);
+}
+
+.suspect-list .silk { min-width: 6.5rem; }
+
+/* --------------------------------------------------------------------------
+   図版
+   -------------------------------------------------------------------------- */
+
+.figure { margin: 0; max-width: 100%; }
+
+.figure svg { display: block; width: 100%; height: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 4px; }
+
+.figure figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+/* SVG 内で使う共通クラス */
+.svg-silk { font-family: var(--font-mono); letter-spacing: 0.06em; }
+
+/* --------------------------------------------------------------------------
+   備忘録一覧（index）
+   -------------------------------------------------------------------------- */
+
+.doc-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.9rem; }
+
+.doc-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--copper);
+  border-radius: 0 4px 4px 0;
+  padding: 0.9rem 1.1rem;
+}
+
+.doc-card__meta { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 0.2rem; }
+
+.doc-card__title { margin: 0 0 0.25rem; font-size: 1.02rem; }
+
+.doc-card__title a { text-decoration: none; }
+.doc-card__title a:hover { text-decoration: underline; }
+
+.doc-card__desc { margin: 0; font-size: 0.88rem; color: var(--ink-soft); }
+
+/* --------------------------------------------------------------------------
+   前後ナビ・フッター
+   -------------------------------------------------------------------------- */
+
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 44rem;
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.9rem;
+}
+
+.site-footer {
+  background: var(--board-deep);
+  color: #a7b4a7;
+  border-top: 3px solid var(--copper);
+  font-size: 0.8rem;
+}
+
+.site-footer__inner { max-width: 60rem; margin: 0 auto; padding: 1.1rem 1.25rem; }
+
+@media (max-width: 40rem) {
+  .status-board__leds { gap: 1rem; }
+  .spec-table th { width: 8.5rem; }
+}

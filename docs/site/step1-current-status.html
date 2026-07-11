@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>step1 現状把握 — ゲーミングPC復活ログ</title>
+<meta name="description" content="故障したゲーミングPCの構成・症状の経過・原因切り分けの記録（step1）">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <p class="site-header__title"><a href="index.html">ゲーミングPC復活ログ</a></p>
+    <span class="site-header__tag">GAMING PC REPAIR LOG</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero__inner">
+    <p class="silk silk--onboard">STEP 1 — LOG 2026-07-11</p>
+    <h1 class="hero__title">現状把握 — 症状の経過と原因の切り分け</h1>
+    <p class="hero__lead">
+      SSD 増設をきっかけに始まった不調は、BIOS 更新でいったん収まったのち、
+      ゲーム中の暗転を境に「起動しない」状態へ悪化した。ここまでに分かっていることを
+      構成・時系列・切り分け結果の順に整理する。
+    </p>
+  </div>
+</section>
+
+<main class="main">
+
+  <section class="section">
+    <h2 class="section__heading">対象マシンの構成</h2>
+    <p>
+      ベースはマウスコンピューター G-Tune のミドルタワー機（購入時 Windows 10 Home）。
+      主要部品は次のとおり。
+    </p>
+    <table class="spec-table">
+      <tbody>
+        <tr><th>マザーボード</th><td>ASRock X570 Phantom Gaming 4 ベース（OEM 版）</td></tr>
+        <tr><th>BIOS</th><td>P2.01 → P5.80 へ更新済み</td></tr>
+        <tr><th>CPU</th><td>AMD Ryzen 7 3700X（8コア/16スレッド）</td></tr>
+        <tr><th>CPU クーラー</th><td>空冷（ダイヤモンドグリス使用）・未着脱</td></tr>
+        <tr><th>GPU</th><td>NVIDIA GeForce RTX 2070 SUPER 8GB</td></tr>
+        <tr><th>メモリ</th><td>DDR4-3200 16GB × 2（計 32GB）</td></tr>
+        <tr><th>SSD（既存）</th><td>M.2 NVMe 1TB — Windows 入り（M2_1 スロット）</td></tr>
+        <tr><th>SSD（増設）</th><td>Crucial P310 1TB — 今回の増設品</td></tr>
+        <tr><th>電源</th><td>800W 80PLUS Titanium</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section">
+    <h2 class="section__heading">症状の経過</h2>
+    <p>
+      LED は経過の状態を示す：<span class="led led--red" aria-hidden="true"></span> 異常
+      ／<span class="led led--amber" aria-hidden="true"></span> 対処・変化点
+      ／<span class="led led--green" aria-hidden="true"></span> 正常。
+    </p>
+    <ol class="timeline">
+      <li><span class="led led--red" aria-hidden="true"></span><span class="timeline__state">異常</span>Crucial P310 を増設すると Windows が起動せず、VGA・BOOT LED が点灯</li>
+      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">正常</span>P310 を外すと正常起動</li>
+      <li><span class="led led--amber" aria-hidden="true"></span><span class="timeline__state">対処</span>BIOS を P2.01 から P5.80 へ更新</li>
+      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">正常</span>P310 装着でも正常起動。Windows で SSD を認識し、初期化・フォーマット完了</li>
+      <li><span class="led led--red" aria-hidden="true"></span><span class="timeline__state">異常</span>Steam ゲーム中に画面が突然真っ黒になり再起動</li>
+      <li><span class="led led--red" aria-hidden="true"></span><span class="timeline__state">異常</span>以後、P310 を外しても起動しない</li>
+      <li><span class="led led--red" aria-hidden="true"></span><span class="timeline__state">異常</span>CPU・DRAM LED が同時点灯し、数秒後に再起動を繰り返す</li>
+      <li><span class="led led--red" aria-hidden="true"></span><span class="timeline__state">異常</span>CMOS クリア・メモリ 1 枚（A2）・SSD 全取り外しでも改善せず</li>
+    </ol>
+    <p class="note">
+      増設直後の VGA・BOOT LED（経過 1）と、現在の CPU・DRAM LED（経過 7）は
+      別の症状である点に注意。前者は BIOS 更新で解消しており、後者が現在の本丸。
+    </p>
+  </section>
+
+  <section class="section">
+    <h2 class="section__heading">実施済みの切り分け</h2>
+    <ul class="check-list">
+      <li><span class="led led--green" aria-hidden="true"></span>BIOS 更新（P2.01 → P5.80）</li>
+      <li><span class="led led--green" aria-hidden="true"></span>CMOS クリア</li>
+      <li><span class="led led--green" aria-hidden="true"></span>メモリ 1 枚ずつの確認（A2 スロット）</li>
+      <li><span class="led led--green" aria-hidden="true"></span>SSD 全取り外しでの起動確認</li>
+      <li><span class="led" aria-hidden="true"></span>CPU・CPU クーラーの着脱（ソケット目視・グリス再塗布）— <strong>未実施</strong></li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2 class="section__heading">切り分けマップ</h2>
+    <p>
+      ここまでの結果を部品ごとの容疑度として模式図に落とすと次のようになる。
+      メモリと SSD は外しても症状が再現するためシロ寄り。最小構成でも
+      CPU・DRAM LED 点灯 → 再起動ループが続くことから、残る容疑はマザーボード・
+      電源・CPU に絞られる。
+    </p>
+    <figure class="figure">
+      <svg viewBox="0 0 760 560" role="img" aria-label="マザーボードの模式図。マザーボード本体が容疑大（赤）、電源と CPU が容疑中（琥珀）、メモリと SSD は切り分け済みでシロ寄り（緑）、GPU は未検証（灰）">
+        <!-- 基板本体（容疑大） -->
+        <rect x="40" y="40" width="460" height="470" rx="6" fill="#f2f6f1" stroke="#e5484d" stroke-width="3"/>
+        <text x="56" y="68" class="svg-silk" font-size="12" fill="#e5484d">マザーボード（OEM / X570）— 容疑◎ 最有力</text>
+
+        <!-- 診断LEDクラスタ（基板右上） -->
+        <g>
+          <text x="360" y="96" class="svg-silk" font-size="10" fill="#5c655d">Q-LED</text>
+          <circle cx="410" cy="92" r="6" fill="#e5484d"/>
+          <circle cx="436" cy="92" r="6" fill="#e5484d"/>
+          <circle cx="462" cy="92" r="6" fill="#b9c2ba"/>
+          <circle cx="488" cy="92" r="6" fill="#b9c2ba"/>
+          <text x="402" y="112" class="svg-silk" font-size="8" fill="#5c655d">CPU</text>
+          <text x="424" y="112" class="svg-silk" font-size="8" fill="#5c655d">DRAM</text>
+          <text x="454" y="112" class="svg-silk" font-size="8" fill="#5c655d">VGA</text>
+          <text x="478" y="112" class="svg-silk" font-size="8" fill="#5c655d">BOOT</text>
+        </g>
+
+        <!-- CPU ソケット（容疑中・未検証） -->
+        <rect x="120" y="140" width="120" height="120" fill="#ffffff" stroke="#eba117" stroke-width="2.5"/>
+        <text x="136" y="192" font-size="14" fill="#20241f">CPU</text>
+        <text x="136" y="212" class="svg-silk" font-size="10" fill="#5c655d">Ryzen 7 3700X</text>
+        <text x="136" y="230" class="svg-silk" font-size="10" fill="#eba117">容疑△ 未検証</text>
+
+        <!-- メモリスロット（シロ寄り） -->
+        <g>
+          <rect x="310" y="140" width="12" height="180" fill="#e3efe6" stroke="#2f9e63" stroke-width="2"/>
+          <rect x="334" y="140" width="12" height="180" fill="#e3efe6" stroke="#2f9e63" stroke-width="2"/>
+          <rect x="358" y="140" width="12" height="180" fill="#e3efe6" stroke="#2f9e63" stroke-width="2"/>
+          <rect x="382" y="140" width="12" height="180" fill="#e3efe6" stroke="#2f9e63" stroke-width="2"/>
+          <text x="310" y="340" class="svg-silk" font-size="10" fill="#2f9e63">メモリ — シロ寄り</text>
+          <text x="310" y="356" class="svg-silk" font-size="9" fill="#5c655d">1枚（A2）でも再現</text>
+        </g>
+
+        <!-- チップセット -->
+        <rect x="200" y="300" width="70" height="70" fill="#dfe8e0" stroke="#a9b8ab" stroke-width="1.5"/>
+        <text x="212" y="340" class="svg-silk" font-size="10" fill="#5c655d">X570</text>
+
+        <!-- M.2 スロット（シロ寄り） -->
+        <g>
+          <rect x="120" y="400" width="150" height="14" fill="#e3efe6" stroke="#2f9e63" stroke-width="2"/>
+          <rect x="300" y="400" width="150" height="14" fill="#e3efe6" stroke="#2f9e63" stroke-width="2"/>
+          <text x="120" y="432" class="svg-silk" font-size="10" fill="#2f9e63">M.2 SSD × 2 — シロ寄り</text>
+          <text x="120" y="448" class="svg-silk" font-size="9" fill="#5c655d">全て外しても再現</text>
+        </g>
+
+        <!-- PCIe スロットと GPU（未検証） -->
+        <g>
+          <rect x="120" y="466" width="250" height="12" fill="#ffffff" stroke="#a9b8ab" stroke-width="1.5"/>
+          <rect x="120" y="482" width="210" height="22" fill="#f0f2ee" stroke="#b9c2ba" stroke-width="2"/>
+          <text x="130" y="498" class="svg-silk" font-size="10" fill="#5c655d">GPU RTX 2070 SUPER — 未検証</text>
+        </g>
+
+        <!-- 24pin コネクタと電源（容疑中） -->
+        <rect x="486" y="200" width="14" height="90" fill="#d9a06b" stroke="#b4632c" stroke-width="1.5"/>
+        <line x1="500" y1="245" x2="580" y2="245" stroke="#b4632c" stroke-width="3"/>
+        <g>
+          <rect x="580" y="185" width="150" height="120" rx="4" fill="#ffffff" stroke="#eba117" stroke-width="2.5"/>
+          <text x="596" y="230" font-size="14" fill="#20241f">電源</text>
+          <text x="596" y="252" class="svg-silk" font-size="10" fill="#5c655d">800W Titanium</text>
+          <text x="596" y="272" class="svg-silk" font-size="10" fill="#eba117">容疑○ 次点</text>
+        </g>
+
+        <!-- 凡例 -->
+        <g>
+          <circle cx="52" cy="540" r="6" fill="#e5484d"/>
+          <text x="64" y="544" class="svg-silk" font-size="10" fill="#5c655d">容疑大</text>
+          <circle cx="132" cy="540" r="6" fill="#eba117"/>
+          <text x="144" y="544" class="svg-silk" font-size="10" fill="#5c655d">容疑中・未検証で残る</text>
+          <circle cx="290" cy="540" r="6" fill="#2f9e63"/>
+          <text x="302" y="544" class="svg-silk" font-size="10" fill="#5c655d">切り分け済み（シロ寄り）</text>
+          <circle cx="470" cy="540" r="6" fill="#b9c2ba"/>
+          <text x="482" y="544" class="svg-silk" font-size="10" fill="#5c655d">未検証（症状への関与は低い見込み）</text>
+        </g>
+      </svg>
+      <figcaption>
+        図1：切り分けマップ（オリジナルの模式図）。枠の色が現時点の容疑度を表す。
+      </figcaption>
+    </figure>
+  </section>
+
+  <section class="section">
+    <h2 class="section__heading">現時点の見立て</h2>
+    <ul class="suspect-list">
+      <li>
+        <span class="led led--red" aria-hidden="true"></span>
+        <span class="silk">容疑◎</span>
+        <span><strong>マザーボード故障。</strong>SSD・メモリを外した最小構成でも CPU・DRAM LED 点灯 → 再起動ループが続くため、共通基盤であるマザーボードが最有力。</span>
+      </li>
+      <li>
+        <span class="led led--amber" aria-hidden="true"></span>
+        <span class="silk">容疑○</span>
+        <span><strong>電源ユニット不良。</strong>発端が高負荷（ゲーム中）の暗転である点と整合する。次点。</span>
+      </li>
+      <li>
+        <span class="led led--amber" aria-hidden="true"></span>
+        <span class="silk">容疑△</span>
+        <span><strong>CPU 故障。</strong>可能性は比較的低いが、クーラー未着脱のため否定できていない。</span>
+      </li>
+      <li>
+        <span class="led" aria-hidden="true"></span>
+        <span class="silk">考慮</span>
+        <span>OEM マザーボードと BIOS（P5.80）の組み合わせ起因の不具合も考慮しておく。</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2 class="section__heading">次のアクション（step2 へ）</h2>
+    <ol>
+      <li><strong>無料でできる切り分けを先に消化する。</strong>CPU クーラーを外し、ソケットのピン曲がり・焼損を目視確認する（外すと CPU グリスの再塗布が必要になるため、グリスは調達リストに入れる）。</li>
+      <li><strong>電源のシロクロ判定。</strong>動作確認済みの別電源を用意できれば、購入前に電源を切り分けられる。</li>
+      <li><strong>交換部品の第一候補は AM4 マザーボード（X570 / B550、ATX）。</strong>リテール品に替えれば、OEM マザーボード＋BIOS 起因の懸念も同時に解消できる。</li>
+    </ol>
+    <p class="note">
+      注意：Windows 10 は OEM ライセンスのため、マザーボード交換後に再認証が必要になる
+      可能性が高い。Microsoft アカウントとの紐付け有無を確認しておくこと。
+    </p>
+  </section>
+
+  <nav class="page-nav">
+    <a href="index.html">← トップへ戻る</a>
+    <span class="silk">次：STEP 2 部品調達（準備中）</span>
+  </nav>
+
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <p>ゲーミングPC復活ログ — 修理の進行に合わせて随時更新する備忘録。掲載している図はすべてオリジナルの模式図。</p>
+  </div>
+</footer>
+
+</body>
+</html>

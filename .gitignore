@@ -1,0 +1,8 @@
+# Claude Code の個人設定（共有しない）
+.claude/settings.local.json
+
+# 未着手項目ログ（内部運用。GitHub には置かない）
+.todo/
+
+# 個体の製品番号とメーカー仕様の転載を含むためローカル参照のみ（公開物へは転記時に除去）
+docs/G-Tune_HN-A_spec.html

@@ -1,0 +1,35 @@
+<!DOCTYPE html><html lang='ja'><meta charset='UTF-8'><title>PCトラブル経過まとめ</title>
+<style>body{font-family:sans-serif;max-width:900px;margin:2em auto;line-height:1.7}table{border-collapse:collapse;width:100%}th,td{border:1px solid #999;padding:8px}th{background:#eee}</style>
+<h1>PCトラブル経過まとめ</h1>
+<h2>構成</h2>
+<ul>
+<li>マザーボード: ASRock X570 Phantom Gaming 4 ベース(OEM)</li>
+<li>CPU: Ryzen 7 3700X</li>
+<li>GPU: RTX 2070 SUPER</li>
+<li>メモリ: DDR4-3200 16GB×2</li>
+<li>Windows SSD: M.2 NVMe (M2_1)</li>
+<li>増設SSD: Crucial P310 1TB</li>
+<li>BIOS: P2.01 → P5.80へ更新</li>
+</ul>
+<h2>経過</h2>
+<table>
+<tr><th>時系列</th><th>内容</th></tr>
+<tr><td>1</td><td>Crucial P310を増設するとWindowsが起動せず、VGA・BOOT LED点灯。</td></tr>
+<tr><td>2</td><td>P310を外すと正常起動。</td></tr>
+<tr><td>3</td><td>BIOSをP2.01からP5.80へ更新。</td></tr>
+<tr><td>4</td><td>P310装着でも正常起動。WindowsでSSD認識、初期化・フォーマット完了。</td></tr>
+<tr><td>5</td><td>Steamゲーム中に画面が突然真っ黒になり再起動。</td></tr>
+<tr><td>6</td><td>以後、P310を外しても起動せず。</td></tr>
+<tr><td>7</td><td>CPU・DRAM LEDが同時点灯し、数秒後に再起動を繰り返す。</td></tr>
+<tr><td>8</td><td>CMOSクリア、メモリ1枚(A2)、SSD全取り外しでも改善せず。</td></tr>
+</table>
+<h2>実施済み</h2><ul>
+<li>BIOS更新</li><li>CMOSクリア</li><li>メモリ1枚ずつ確認</li><li>SSD取り外し確認</li><li>CPU・CPUクーラー未着脱</li></ul>
+<h2>現時点の見立て</h2>
+<ol>
+<li>マザーボード故障の可能性が最も高い。</li>
+<li>次点で電源ユニット不良。</li>
+<li>CPU故障の可能性は比較的低いが否定不可。</li>
+<li>OEMマザーボードとBIOSの影響も考慮。</li>
+</ol>
+</html>

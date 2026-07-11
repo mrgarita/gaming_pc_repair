@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ゲーミングPC復活ログ</title>
+<meta name="description" content="故障したゲーミングPC（Ryzen 7 3700X / RTX 2070 SUPER）を復活させるまでの修理備忘録">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <p class="site-header__title"><a href="index.html">ゲーミングPC復活ログ</a></p>
+    <span class="site-header__tag">GAMING PC REPAIR LOG</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero__inner">
+    <p class="silk silk--onboard">PROJECT — 故障したゲーミングPCを復活させる</p>
+    <h1 class="hero__title">電源は入る、しかし起動しない。<br>1 台のゲーミングPCを復活させるまでの記録</h1>
+    <p class="hero__lead">
+      Ryzen 7 3700X と RTX 2070 SUPER を積んだ G-Tune 製ゲーミングPCが、SSD 増設と
+      BIOS 更新を経たある日、ゲーム中の暗転を最後に起動しなくなった。原因の切り分けから
+      部品交換、復活までの経過を、この備忘録に残していく。
+    </p>
+    <div class="status-board">
+      <p class="status-board__title">MACHINE STATUS — 診断LED（現在の症状）</p>
+      <ul class="status-board__leds">
+        <li><span class="led led--red led--cycle" aria-hidden="true"></span>CPU</li>
+        <li><span class="led led--red led--cycle" aria-hidden="true"></span>DRAM</li>
+        <li><span class="led" aria-hidden="true"></span>VGA</li>
+        <li><span class="led" aria-hidden="true"></span>BOOT</li>
+      </ul>
+      <p class="status-board__note">CPU・DRAM が同時点灯し、数秒後に再起動を繰り返す（2026-07 時点）</p>
+    </div>
+  </div>
+</section>
+
+<main class="main">
+
+  <section class="section">
+    <h2 class="section__heading">進め方</h2>
+    <p>
+      修理は 4 つの step で進める。step3 の動作検証で動かなければ step1 の切り分けに
+      戻る——このループが本プロジェクトの骨格になる。
+    </p>
+    <figure class="figure">
+      <svg viewBox="0 0 760 200" role="img" aria-label="step1 現状把握 → step2 部品調達 → step3 組み立て・検証 → step4 復活完了。step3 で動作しない場合は step1 に戻る">
+        <!-- 銅配線（step 間の接続） -->
+        <g stroke="#b4632c" stroke-width="3" fill="none">
+          <line x1="168" y1="80" x2="212" y2="80"/>
+          <line x1="356" y1="80" x2="400" y2="80"/>
+          <line x1="544" y1="80" x2="588" y2="80"/>
+          <!-- 戻り配線：step3 → step1（90°曲げの基板配線風） -->
+          <polyline points="472,120 472,168 92,168 92,120"/>
+        </g>
+        <!-- ヴィア（配線の端子） -->
+        <g fill="#f7f7f3" stroke="#b4632c" stroke-width="3">
+          <circle cx="472" cy="168" r="5"/>
+          <circle cx="92" cy="168" r="5"/>
+        </g>
+        <!-- 戻りの矢印 -->
+        <path d="M 92 124 L 86 136 L 98 136 Z" fill="#b4632c"/>
+        <text x="282" y="188" class="svg-silk" font-size="12" fill="#5c655d">動作しない場合は step1 へ戻る</text>
+
+        <!-- step ノード -->
+        <g>
+          <rect x="16" y="40" width="152" height="80" rx="4" fill="#143528"/>
+          <text x="32" y="66" class="svg-silk" font-size="11" fill="#d9a06b">STEP 1</text>
+          <circle cx="146" cy="62" r="5" fill="#2f9e63"/>
+          <text x="32" y="94" font-size="15" fill="#e9efe9">現状把握</text>
+          <text x="32" y="112" class="svg-silk" font-size="10" fill="#a7b4a7">切り分け・見立て</text>
+        </g>
+        <g>
+          <rect x="212" y="40" width="144" height="80" rx="4" fill="#ffffff" stroke="#eba117" stroke-width="2"/>
+          <text x="228" y="66" class="svg-silk" font-size="11" fill="#b4632c">STEP 2</text>
+          <circle cx="334" cy="62" r="5" fill="#eba117"/>
+          <text x="228" y="94" font-size="15" fill="#20241f">部品調達</text>
+          <text x="228" y="112" class="svg-silk" font-size="10" fill="#5c655d">使える部品は流用</text>
+        </g>
+        <g>
+          <rect x="400" y="40" width="144" height="80" rx="4" fill="#ffffff" stroke="#d8ddd5" stroke-width="2"/>
+          <text x="416" y="66" class="svg-silk" font-size="11" fill="#5c655d">STEP 3</text>
+          <circle cx="522" cy="62" r="5" fill="#b9c2ba"/>
+          <text x="416" y="94" font-size="15" fill="#20241f">組み立て・検証</text>
+          <text x="416" y="112" class="svg-silk" font-size="10" fill="#5c655d">動作可なら step4 へ</text>
+        </g>
+        <g>
+          <rect x="588" y="40" width="144" height="80" rx="4" fill="#ffffff" stroke="#d8ddd5" stroke-width="2"/>
+          <text x="604" y="66" class="svg-silk" font-size="11" fill="#5c655d">STEP 4</text>
+          <circle cx="710" cy="62" r="5" fill="#b9c2ba"/>
+          <text x="604" y="94" font-size="15" fill="#20241f">復活完了</text>
+          <text x="604" y="112" class="svg-silk" font-size="10" fill="#5c655d">安定動作を確認</text>
+        </g>
+      </svg>
+      <figcaption>
+        図1：プロジェクトの進行フロー。LED は各 step の状態（緑＝完了、琥珀＝進行中、灰＝未着手）。
+      </figcaption>
+    </figure>
+  </section>
+
+  <section class="section">
+    <h2 class="section__heading">備忘録</h2>
+    <ul class="doc-list">
+      <li class="doc-card">
+        <div class="doc-card__meta">
+          <span class="silk">STEP 1</span>
+          <span class="silk">2026-07-11</span>
+        </div>
+        <h3 class="doc-card__title"><a href="step1-current-status.html">現状把握 — 症状の経過と原因の切り分け</a></h3>
+        <p class="doc-card__desc">
+          構成の整理、SSD 増設から起動不能に至るまでの時系列、実施済みの切り分けと
+          「マザーボードが最有力」という現時点の見立てをまとめた。
+        </p>
+      </li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <p>ゲーミングPC復活ログ — 修理の進行に合わせて随時更新する備忘録。掲載している図はすべてオリジナルの模式図。</p>
+  </div>
+</footer>
+
+</body>
+</html>
