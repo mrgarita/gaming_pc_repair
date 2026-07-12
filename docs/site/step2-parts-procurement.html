@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>step2 部品調達 — ゲーミングPC復活ログ</title>
-<meta name="description" content="AM4 マザーボードの選定・リテール品と OEM 版の違い・交換方針と候補部品リスト（step2）">
+<meta name="description" content="AM4 マザーボードの選定・候補 2 枚（ASRock B550 PG4 / ASUS TUF B550-PLUS）の比較・交換方針と候補部品リスト（step2）">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,7 +18,7 @@
 
 <section class="hero">
   <div class="hero__inner">
-    <p class="silk silk--onboard">STEP 2 — LOG 2026-07-11</p>
+    <p class="silk silk--onboard">STEP 2 — LOG 2026-07-11 · UPD 2026-07-12</p>
     <h1 class="hero__title">部品調達 — AM4 マザーボードの選定と交換方針</h1>
     <p class="hero__lead">
       予備部品がなく電源の事前切り分けができないため、「最有力容疑のマザーボードを
@@ -130,16 +130,151 @@
   </section>
 
   <section class="section">
+    <h2 class="section__heading">候補 2 枚の比較 — どちらの B550 にするか（2026-07-12 追記）</h2>
+    <p>
+      候補を <strong>ASRock B550 Phantom Gaming 4</strong> と
+      <strong>ASUS TUF GAMING B550-PLUS</strong> の 2 枚に絞り、公式仕様で比較した。
+      どちらも Socket AM4・Ryzen 7 3700X（Ryzen 3000 シリーズ）対応・ATX で、
+      適合性はともに問題ない。判断基準は次の 3 条件。
+    </p>
+    <ol>
+      <li>Wi-Fi 子機 <strong>ASUS PCE-AX58BT</strong>（PCI Express x1 接続）をそのまま流用できること</li>
+      <li>負荷の高いゲームをプレイするゲーミング用途に耐えること</li>
+      <li>M.2 NVMe SSD を 2 枚（OS 用＋ゲーム保存用）搭載でき、冷却も確保できること</li>
+    </ol>
+    <div class="table-scroll">
+      <table class="spec-table spec-table--compare">
+        <thead>
+          <tr><th>項目</th><th>ASRock B550 Phantom Gaming 4</th><th>ASUS TUF GAMING B550-PLUS</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>最安価格（税込）</th><td>約 12,600 円</td><td>約 16,640 円（19 店舗取扱）</td></tr>
+          <tr><th>適合性</th><td>AM4・3700X 対応・ATX：○</td><td>AM4・3700X 対応・ATX：○</td></tr>
+          <tr><th>PCIe x1<br>（条件 1）</th><td>2 本：○</td><td><span class="win">3 本：○</span>　GPU クーラーで 1 本塞がれても余裕がある</td></tr>
+          <tr><th>M.2 1 本目</th><td>PCIe Gen4 x4（CPU 直結）</td><td>PCIe Gen4 x4（CPU 直結）</td></tr>
+          <tr><th>M.2 2 本目<br>（条件 3）</th><td>PCIe Gen3 <strong>x2</strong> — 帯域が x4 の半分。2280 まで対応</td><td><span class="win">PCIe Gen3 x4</span> — 22110 まで対応</td></tr>
+          <tr><th>M.2 ヒートシンク</th><td>付属なし</td><td><span class="win">1 基付属</span>（Gen3 側に標準装着。Gen4 側へ付け替えも可）</td></tr>
+          <tr><th>USB Type-C</th><td>なし（リア・フロントとも）</td><td><span class="win">リアに 1 基</span>（USB 3.2 Gen2・10Gbps）</td></tr>
+          <tr><th>有線 LAN</th><td>1Gb（Realtek RTL8111H）</td><td><span class="win">2.5Gb</span>（Realtek RTL8125B）</td></tr>
+          <tr><th>電源回路<br>（条件 2）</th><td>8 フェーズ電源設計</td><td>Dr.MOS 採用のデジタル電源＋大型 VRM ヒートシンク</td></tr>
+          <tr><th>その他</th><td>現 OEM 板（X570 PG4 ベース）と同系列で、コネクタ配置が近く移行しやすい</td><td>ミリタリーグレード部品採用をうたう耐久重視シリーズ</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      条件 1（Wi-Fi 子機の流用）は<strong>両方とも満たす</strong>。差が付いたのは条件 2・3 で、
+      TUF GAMING B550-PLUS は M.2 の 2 本目が Gen3 x4（ASRock は x2 で帯域が半分）、
+      M.2 ヒートシンクが 1 基付属し、電源回路の冷却も手厚い。さらに ASRock にはない
+      USB Type-C と 2.5Gb LAN も付く。差額は約 4,000 円だが、高負荷ゲームと SSD 2 枚運用が
+      前提である以上、<strong>ASUS TUF GAMING B550-PLUS を第一候補とする</strong>。
+    </p>
+    <p class="note">
+      排他仕様の補足：どちらの板も M.2 の 2 本目を使うと SATA ポートの 5・6 番が無効になるが、
+      本機は SATA ドライブを使っていないため影響なし。また TUF GAMING B550-PLUS は
+      PCIe x1 スロット使用時に 2 本目の x16 スロット（通常 x4 動作）が x1 動作に落ちる仕様だが、
+      2 本目の x16 を使う予定はないためこれも影響なし。
+    </p>
+    <figure class="figure">
+      <svg viewBox="0 0 760 500" role="img" aria-label="TUF GAMING B550-PLUS 採用時の搭載計画。ソケットに Ryzen 7 3700X、M.2_1 に OS 用の CFD PG3VNF、x16 スロットに RTX 2070 SUPER、x1 スロットに PCE-AX58BT、M.2_2 に付属ヒートシンクを装着した Crucial P310 を搭載する">
+        <text x="16" y="26" class="svg-silk" font-size="11" fill="#b4632c">ASUS TUF GAMING B550-PLUS — 搭載計画（板の上から順）</text>
+
+        <!-- 行 1：ソケット AM4 ← Ryzen 7 3700X -->
+        <g>
+          <rect x="16" y="42" width="250" height="62" rx="4" fill="#143528"/>
+          <text x="30" y="68" class="svg-silk" font-size="10" fill="#d9a06b">SOCKET AM4</text>
+          <text x="30" y="90" font-size="13" fill="#e9efe9">CPU ソケット</text>
+          <line x1="266" y1="73" x2="306" y2="73" stroke="#b4632c" stroke-width="3"/>
+          <rect x="306" y="42" width="438" height="62" rx="4" fill="#ffffff" stroke="#2f9e63" stroke-width="2"/>
+          <circle cx="326" cy="73" r="5" fill="#2f9e63"/>
+          <text x="342" y="68" font-size="14" fill="#20241f">Ryzen 7 3700X（流用）</text>
+          <text x="342" y="90" class="svg-silk" font-size="10" fill="#5c655d">グリスを塗り直して装着する</text>
+        </g>
+
+        <!-- 行 2：M.2_1 ← CFD PG3VNF（OS） -->
+        <g>
+          <rect x="16" y="116" width="250" height="62" rx="4" fill="#ffffff" stroke="#b4632c" stroke-width="2"/>
+          <text x="30" y="142" class="svg-silk" font-size="10" fill="#b4632c">M.2_1 — GEN4 X4（CPU 直結）</text>
+          <text x="30" y="164" font-size="13" fill="#20241f">上段 M.2 スロット</text>
+          <line x1="266" y1="147" x2="306" y2="147" stroke="#b4632c" stroke-width="3"/>
+          <rect x="306" y="116" width="438" height="62" rx="4" fill="#ffffff" stroke="#2f9e63" stroke-width="2"/>
+          <circle cx="326" cy="147" r="5" fill="#2f9e63"/>
+          <text x="342" y="142" font-size="14" fill="#20241f">CFD PG3VNF 1TB（流用）— OS 用</text>
+          <text x="342" y="164" class="svg-silk" font-size="10" fill="#5c655d">Gen4 SSD をフル速度で。自前ヒートシンクのまま装着</text>
+        </g>
+
+        <!-- 行 3：PCIe x16 ← RTX 2070 SUPER -->
+        <g>
+          <rect x="16" y="190" width="250" height="62" rx="4" fill="#143528"/>
+          <text x="30" y="216" class="svg-silk" font-size="10" fill="#d9a06b">PCIE X16 — GEN4</text>
+          <text x="30" y="238" font-size="13" fill="#e9efe9">グラフィックス用スロット</text>
+          <line x1="266" y1="221" x2="306" y2="221" stroke="#b4632c" stroke-width="3"/>
+          <rect x="306" y="190" width="438" height="62" rx="4" fill="#ffffff" stroke="#2f9e63" stroke-width="2"/>
+          <circle cx="326" cy="221" r="5" fill="#2f9e63"/>
+          <text x="342" y="216" font-size="14" fill="#20241f">RTX 2070 SUPER（流用）</text>
+          <text x="342" y="238" class="svg-silk" font-size="10" fill="#5c655d">クーラーの厚みで直下の x1 は 1 本塞がる想定</text>
+        </g>
+
+        <!-- 行 4：PCIe x1 ← PCE-AX58BT -->
+        <g>
+          <rect x="16" y="264" width="250" height="62" rx="4" fill="#ffffff" stroke="#b4632c" stroke-width="2"/>
+          <text x="30" y="290" class="svg-silk" font-size="10" fill="#b4632c">PCIE X1 — 3 本のうち空きの 1 本</text>
+          <text x="30" y="312" font-size="13" fill="#20241f">拡張スロット</text>
+          <line x1="266" y1="295" x2="306" y2="295" stroke="#b4632c" stroke-width="3"/>
+          <rect x="306" y="264" width="438" height="62" rx="4" fill="#ffffff" stroke="#2f9e63" stroke-width="2"/>
+          <circle cx="326" cy="295" r="5" fill="#2f9e63"/>
+          <text x="342" y="290" font-size="14" fill="#20241f">ASUS PCE-AX58BT（流用）— Wi-Fi 子機</text>
+          <text x="342" y="312" class="svg-silk" font-size="10" fill="#5c655d">条件 1 を満たす。x1 接続のまま移設できる</text>
+        </g>
+
+        <!-- 行 5：M.2_2 ← Crucial P310（ゲーム） -->
+        <g>
+          <rect x="16" y="338" width="250" height="62" rx="4" fill="#ffffff" stroke="#b4632c" stroke-width="2"/>
+          <text x="30" y="364" class="svg-silk" font-size="10" fill="#b4632c">M.2_2 — GEN3 X4（チップセット）</text>
+          <text x="30" y="386" font-size="13" fill="#20241f">下段 M.2 スロット</text>
+          <line x1="266" y1="369" x2="306" y2="369" stroke="#b4632c" stroke-width="3"/>
+          <rect x="306" y="338" width="438" height="62" rx="4" fill="#ffffff" stroke="#2f9e63" stroke-width="2"/>
+          <circle cx="326" cy="369" r="5" fill="#2f9e63"/>
+          <text x="342" y="364" font-size="14" fill="#20241f">Crucial P310 1TB（流用）— Steam ゲーム用</text>
+          <text x="342" y="386" class="svg-silk" font-size="10" fill="#5c655d">付属アルミヒートシンクをここに装着して冷却を確保</text>
+        </g>
+
+        <!-- 補足行 -->
+        <g>
+          <rect x="16" y="414" width="728" height="46" rx="4" fill="#f0f2ee" stroke="#d8ddd5" stroke-width="1.5"/>
+          <text x="30" y="442" class="svg-silk" font-size="11" fill="#5c655d">補足：M.2_2 使用時は SATA 5・6 番ポートが無効化 — SATA ドライブ未使用のため影響なし</text>
+        </g>
+      </svg>
+      <figcaption>
+        図2：TUF GAMING B550-PLUS 採用時の搭載計画（オリジナルの模式図）。手持ち部品の置き場所と
+        冷却の割り当てを示す。P310 は Gen4 SSD だが下段では Gen3 動作になる（ゲームの読み込み用途では体感差は小さい）。
+      </figcaption>
+    </figure>
+    <p>
+      出典：
+      <a href="https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b550-plus/techspec/">ASUS 公式仕様（TUF GAMING B550-PLUS）</a>／
+      <a href="https://pg.asrock.com/mb/AMD/B550%20Phantom%20Gaming%204/index.jp.asp">ASRock 公式（B550 Phantom Gaming 4）</a>／
+      <a href="https://kakaku.com/item/K0001259409/">価格.com（TUF GAMING B550-PLUS）</a>／
+      <a href="https://kakaku.com/item/K0001265326/">価格.com（B550 Phantom Gaming 4）</a>／
+      <a href="https://www.try-vegaspro.com/asus-tg-b550plus-845">TRY VEGAS PRO のレビュー（M.2 ヒートシンクの装着位置を確認）</a>
+      ——価格はいずれも 2026-07-12 時点の最安値。
+    </p>
+  </section>
+
+  <section class="section">
     <h2 class="section__heading">購入候補リスト（2026-07 時点）</h2>
     <table class="spec-table">
       <tbody>
         <tr>
           <th>マザーボード<br>（第一候補・ATX）</th>
-          <td>ASRock B550 Phantom Gaming 4 — 約 12,000〜15,000 円。元の OEM 板（X570 Phantom Gaming 4 ベース）と同系列のリテール品で、コネクタ配置が近く移行が分かりやすい</td>
+          <td><strong>ASUS TUF GAMING B550-PLUS</strong> — 約 16,640 円（2026-07-12 価格.com 最安・19 店舗）。上の比較で第一候補に確定。M.2 の 2 本目が Gen3 x4 でヒートシンク付属、USB Type-C・2.5Gb LAN あり</td>
+        </tr>
+        <tr>
+          <th>マザーボード<br>（次点・ATX）</th>
+          <td>ASRock B550 Phantom Gaming 4 — 約 12,600 円。約 4,000 円安く現 OEM 板と同系列だが、M.2 の 2 本目が Gen3 x2・ヒートシンクなし・Type-C なしのため次点</td>
         </tr>
         <tr>
           <th>マザーボード<br>（代替・MicroATX）</th>
-          <td>MSI PRO B550M-P — 税込 15,131 円（2026-06 発売・Amazon 限定）。発売が新しく供給が安定。MicroATX でも現ケースにネジ穴互換で搭載可</td>
+          <td>MSI PRO B550M-P — 税込 15,131 円（2026-06 発売・Amazon 限定）。上位 2 候補が入手不能になった場合の代替。MicroATX でも現ケースにネジ穴互換で搭載可</td>
         </tr>
         <tr>
           <th>CPU グリス</th>

@@ -264,6 +264,15 @@ a:hover { color: var(--board); }
   background: #f0f2ee;
 }
 
+/* 比較テーブル（3 列）：狭い画面では横スクロールで逃がす */
+.table-scroll { max-width: 44rem; overflow-x: auto; }
+.table-scroll .spec-table { min-width: 42rem; }
+
+.spec-table--compare th { width: auto; }
+.spec-table--compare tbody th { width: 9.5rem; }
+.spec-table--compare td { vertical-align: top; }
+.spec-table--compare .win { color: var(--led-green); font-weight: 700; }
+
 /* --------------------------------------------------------------------------
    タイムライン（経過）：LED 状態付き
    -------------------------------------------------------------------------- */

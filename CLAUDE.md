@@ -6,7 +6,9 @@
 ## リポジトリの状態
 
 step2（部品調達）進行中——交換方針は「B550 リテールのマザーボード先行交換 →
-直らなければ電源」の二段構えで文書化済み、購入判断はユーザー待ち。備忘録サイト
+直らなければ電源」の二段構えで文書化済み。候補 2 枚の仕様比較で
+ASUS TUF GAMING B550-PLUS を第一候補に確定（次点 ASRock B550 Phantom Gaming 4、
+2026-07-12。比較表と搭載計画は step2 ページ参照）、購入判断はユーザー待ち。備忘録サイト
 `docs/site/`（`index.html`・`step1-current-status.html`・`step2-parts-procurement.html`・
 `style.css`）を運用中。「正」となるファイルは `project.txt`（プロジェクト全体の手順）と
 `docs/` 直下の 2 文書（`PCトラブル経過まとめ.html`＝故障経過と切り分け状況、
