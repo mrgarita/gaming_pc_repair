@@ -18,7 +18,7 @@
 
 <section class="hero">
   <div class="hero__inner">
-    <p class="silk silk--onboard">STEP 1 — LOG 2026-07-11</p>
+    <p class="silk silk--onboard">STEP 1 — LOG 2026-07-11 · UPD 2026-07-16</p>
     <h1 class="hero__title">現状把握 — 症状の経過と原因の切り分け</h1>
     <p class="hero__lead">
       SSD 増設をきっかけに始まった不調は、BIOS 更新でいったん収まったのち、
@@ -68,6 +68,8 @@
       <li><span class="led led--red" aria-hidden="true"></span><span class="timeline__state">異常</span>以後、P310 を外しても起動しない</li>
       <li><span class="led led--red" aria-hidden="true"></span><span class="timeline__state">異常</span>CPU・DRAM LED が同時点灯し、数秒後に再起動を繰り返す</li>
       <li><span class="led led--red" aria-hidden="true"></span><span class="timeline__state">異常</span>CMOS クリア・メモリ 1 枚（A2）・SSD 全取り外しでも改善せず</li>
+      <li><span class="led led--amber" aria-hidden="true"></span><span class="timeline__state">対処</span>マザー交換の準備中、旧 OS SSD をケースに入れて別 PC で中身の確認を試みる（2026-07-16）</li>
+      <li><span class="led led--red" aria-hidden="true"></span><span class="timeline__state">異常</span>読み込みが数分単位で停滞したのち認識消失——旧 OS SSD 自体の不調が発覚（詳細は <a href="step3-assembly-verification.html">step3</a>）</li>
     </ol>
     <p class="note">
       増設直後の VGA・BOOT LED（経過 1）と、現在の CPU・DRAM LED（経過 7）は
@@ -96,7 +98,9 @@
       ここまでの結果を部品ごとの容疑度として模式図に落とすと次のようになる。
       メモリと SSD は外しても症状が再現するためシロ寄り。最小構成でも
       CPU・DRAM LED 点灯 → 再起動ループが続くことから、残る容疑はマザーボード・
-      電源・CPU に絞られる。
+      電源・CPU に絞られる。なお後日、旧 OS SSD 自体に別の不調が発覚した
+      （2026-07-16）。「起動ループの原因としてはシロ寄り」の判定は変わらないが、
+      詳細は <a href="step3-assembly-verification.html">step3</a> に記録した。
     </p>
     <figure class="figure">
       <svg viewBox="0 0 760 560" role="img" aria-label="マザーボードの模式図。マザーボード本体が容疑大（赤）、電源と CPU が容疑中（琥珀）、メモリと SSD は切り分け済みでシロ寄り（緑）、GPU は未検証（灰）">
@@ -143,6 +147,7 @@
           <rect x="300" y="400" width="150" height="14" fill="#e3efe6" stroke="#2f9e63" stroke-width="2"/>
           <text x="120" y="432" class="svg-silk" font-size="10" fill="#2f9e63">M.2 SSD × 2 — シロ寄り</text>
           <text x="120" y="448" class="svg-silk" font-size="9" fill="#5c655d">全て外しても再現</text>
+          <text x="300" y="440" class="svg-silk" font-size="9" fill="#eba117">※旧 OS 側の SSD 自体に別の不調が発覚（2026-07-16・step3）</text>
         </g>
 
         <!-- PCIe スロットと GPU（未検証） -->
@@ -202,6 +207,11 @@
         <span class="led" aria-hidden="true"></span>
         <span class="silk">考慮</span>
         <span>OEM マザーボードと BIOS（P5.80）の組み合わせ起因の不具合も考慮しておく。</span>
+      </li>
+      <li>
+        <span class="led led--amber" aria-hidden="true"></span>
+        <span class="silk">考慮</span>
+        <span>根本原因が電源で、マザーボードや SSD が巻き添えになった筋も考慮。旧 OS SSD の不調発覚（2026-07-16・<a href="step3-assembly-verification.html">step3</a>）はこの筋とも整合しうる。</span>
       </li>
     </ul>
   </section>
