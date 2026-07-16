@@ -336,6 +336,16 @@ a:hover { color: var(--board); }
 
 .figure svg { display: block; width: 100%; height: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 4px; }
 
+/* 写真・スクリーンショット（本文幅に合わせて縮小表示） */
+.figure img {
+  display: block;
+  width: 100%;
+  max-width: 44rem;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
 .figure figcaption {
   margin-top: 0.5rem;
   font-size: 0.82rem;

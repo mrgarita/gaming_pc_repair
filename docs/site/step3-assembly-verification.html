@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>step3 組み立て・検証 — ゲーミングPC復活ログ</title>
+<meta name="description" content="部品到着後に発覚した旧 OS SSD の認識不良、データ救出計画、マザーボード交換手順と動作検証チェックリスト（step3）">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <p class="site-header__title"><a href="index.html">ゲーミングPC復活ログ</a></p>
+    <span class="site-header__tag">GAMING PC REPAIR LOG</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero__inner">
+    <p class="silk silk--onboard">STEP 3 — LOG 2026-07-16</p>
+    <h1 class="hero__title">組み立て・検証 — 部品はそろった、しかし旧 SSD に新トラブル</h1>
+    <p class="hero__lead">
+      マザーボードとグリスは無事に到着した。ところが交換作業を前に、旧 OS 入り SSD の
+      中身を確認しようとしたら認識不良が発覚。搭載計画を「OS は P310 へクリーンインストール、
+      旧 SSD はデータ救出対象として隔離」に修正したうえで、交換手順と検証チェックリストをまとめる。
+    </p>
+  </div>
+</section>
+
+<main class="main">
+
+  <section class="section">
+    <h2 class="section__heading">部品到着 — 購入リストの 2 点がそろった</h2>
+    <table class="spec-table">
+      <tbody>
+        <tr><th>マザーボード</th><td><strong>ASUS TUF GAMING B550-PLUS</strong>（新品・ATX）— ネット通販で購入、到着済み</td></tr>
+        <tr><th>CPU グリス</th><td><strong>ARCTIC MX-4（4g）</strong>（新品）— 同じく到着済み。クーラー再取り付け時に塗り直す</td></tr>
+      </tbody>
+    </table>
+    <p class="note">
+      購入時の小話：通販サイトの「残り 1 点」表示に急かされて注文したが、翌日たまたま
+      実店舗をのぞいたら同じ製品が 5 枚ほど積み重なっていた。EC の残数表示は販促演出の
+      場合がある——数量表示だけで焦って判断しない、という教訓を得た（実害はなし）。
+    </p>
+  </section>
+
+  <section class="section">
+    <h2 class="section__heading">新トラブル — 旧 OS SSD（CFD PG3VNF 1TB）の認識不良</h2>
+    <p>
+      交換作業の前に、旧 OS 入り M.2 SSD の中身を確認しようと、SSD ケース
+      （ロジテック LHR-LPNVW02UCD・USB 3.2 Gen2 対応の NVMe ケース）に入れて
+      別の Windows PC へ接続した。経過は次のとおり。
+    </p>
+    <ol class="timeline">
+      <li><span class="led led--amber" aria-hidden="true"></span><span class="timeline__state">対処</span>旧 OS SSD を SSD ケースに装着し、別の Windows PC へ USB 接続（2026-07-16）</li>
+      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">正常</span>いったんは認識し、エクスプローラーで中身も表示された</li>
+      <li><span class="led led--red" aria-hidden="true"></span><span class="timeline__state">異常</span>フォルダを開こうとすると数分待たされ、ようやく開く状態に</li>
+      <li><span class="led led--red" aria-hidden="true"></span><span class="timeline__state">異常</span>しばらくすると SSD 自体が認識されなくなった</li>
+      <li><span class="led led--red" aria-hidden="true"></span><span class="timeline__state">異常</span>「ディスクの管理」でも表示まで待たされ、「不明・初期化されていません」に。容量表示すら出ない（写真1）</li>
+      <li><span class="led led--amber" aria-hidden="true"></span><span class="timeline__state">対処</span>「ディスクの初期化」ダイアログ（写真2）は<strong>キャンセル</strong>——初期化はしていない</li>
+    </ol>
+    <figure class="figure">
+      <img src="images/step3-disk-management.png" alt="ディスクの管理のスクリーンショット。ディスク0（接続先PC自身のディスク）は正常だが、ディスク1が「不明・初期化されていません」と表示され、容量も表示されていない" loading="lazy">
+      <figcaption>
+        写真1：「ディスクの管理」の実画面。ディスク 0 は接続先 PC 自身のディスク（正常）。
+        問題の旧 OS SSD はディスク 1 で、「不明・初期化されていません」——容量すら読めていない。
+      </figcaption>
+    </figure>
+    <figure class="figure">
+      <img src="images/step3-init-dialog.png" alt="ディスクの初期化ダイアログのスクリーンショット。ディスク1を MBR または GPT で初期化するよう促している" loading="lazy">
+      <figcaption>
+        写真2：ディスクの管理を開くと表示された「ディスクの初期化」ダイアログ。ここで OK を
+        押してはいけない。キャンセルで閉じた。
+      </figcaption>
+    </figure>
+    <p class="note">
+      <strong>初期化してはいけない理由：</strong>「初期化」は新しい空のパーティション管理情報を
+      書き込む操作で、実行するとデータ救出の難易度が一気に上がる。逆に言えば
+      「初期化されていません」という表示は<strong>データが消えたという意味ではなく</strong>、
+      管理情報が読み取れていないだけの可能性がある。同じ理由で、フォーマットや
+      chkdsk（チェックディスク）も救出が終わるまで実行しない。
+    </p>
+    <p>
+      考察：「読み込みが数分単位で停滞 → その後認識消失」という経過は、読み取りエラーの
+      リトライを繰り返している SSD 側の不調（コントローラや NAND の異常）に典型的な
+      パターン。ただし NVMe SSD は USB ケース内で高温になりやすく、ケースの発熱や
+      USB ブリッジの相性でも似た症状が出ることがあるため、クロ確定は後述の
+      NVMe 直結での再確認まで保留する。
+    </p>
+    <p>
+      切り分けへの影響：step1 で確認したとおり、起動ループは SSD を全部外しても再現した。
+      つまり<strong>この SSD 不調は「PC が起動しない」原因ではなく、別の（あるいは同じ根本原因から
+      派生した）追加のトラブル</strong>であり、「マザーボード最有力」という見立ては変わらない。
+      一方で「根本原因が電源で、マザーボードや SSD が巻き添えになった」という筋も
+      考えられるため、第 2 段（電源交換）の構えは維持する。
+    </p>
+  </section>
+
+  <section class="section">
+    <h2 class="section__heading">方針の修正 — OS は P310 へ、旧 SSD は救出対象に</h2>
+    <p>
+      当初の搭載計画（<a href="step2-parts-procurement.html">step2</a> の図2）では旧 OS SSD を
+      M.2_1 に載せてそのまま起動する予定だったが、信頼できないドライブから OS を起動するのは
+      検証の混乱のもとになる。追加購入なし（既存部品のみ）で成立する次の形に修正する。
+    </p>
+    <table class="spec-table">
+      <tbody>
+        <tr><th>OS ドライブ</th><td>旧 CFD PG3VNF を流用 → <strong>Crucial P310 1TB に Windows 11 をクリーンインストール</strong>（M.2_1・Gen4 CPU 直結へ配置換え。付属ヒートシンクもこちらに装着）</td></tr>
+        <tr><th>旧 CFD PG3VNF</th><td>M.2_1 に搭載 → <strong>当面 PC に組み込まない。</strong>未バックアップの大事なデータがあるため「データ救出対象」として隔離保管し、通電は救出作業のときだけにする</td></tr>
+        <tr><th>M.2_2</th><td>P310（ゲーム用）→ <strong>空き。</strong>救出作業のときだけ CFD を一時装着する口として使う</td></tr>
+        <tr><th>P310 の中身</th><td>インストール済みだったゲームは消えるが、Steam から再ダウンロードで復元できる</td></tr>
+        <tr><th>Windows ライセンス</th><td>Microsoft アカウント紐付けのデジタルライセンスなので、クリーンインストールでも再認証できる見込み（手順は <a href="step2-parts-procurement.html">step2</a> 参照）</td></tr>
+      </tbody>
+    </table>
+    <figure class="figure">
+      <svg viewBox="0 0 760 574" role="img" aria-label="TUF GAMING B550-PLUS 搭載計画の改訂版。ソケットに Ryzen 7 3700X、M.2_1 に OS 用として Crucial P310、x16 スロットに RTX 2070 SUPER、x1 スロットに PCE-AX58BT を搭載し、M.2_2 は空きとして救出作業時のみ CFD PG3VNF を一時装着する">
+        <text x="16" y="26" class="svg-silk" font-size="11" fill="#b4632c">ASUS TUF GAMING B550-PLUS — 搭載計画・改訂版（板の上から順）</text>
+
+        <!-- 行 1：ソケット AM4 ← Ryzen 7 3700X -->
+        <g>
+          <rect x="16" y="42" width="250" height="62" rx="4" fill="#143528"/>
+          <text x="30" y="68" class="svg-silk" font-size="10" fill="#d9a06b">SOCKET AM4</text>
+          <text x="30" y="90" font-size="13" fill="#e9efe9">CPU ソケット</text>
+          <line x1="266" y1="73" x2="306" y2="73" stroke="#b4632c" stroke-width="3"/>
+          <rect x="306" y="42" width="438" height="62" rx="4" fill="#ffffff" stroke="#2f9e63" stroke-width="2"/>
+          <circle cx="326" cy="73" r="5" fill="#2f9e63"/>
+          <text x="342" y="68" font-size="14" fill="#20241f">Ryzen 7 3700X（流用）</text>
+          <text x="342" y="90" class="svg-silk" font-size="10" fill="#5c655d">MX-4 を塗り直してクーラーを装着する</text>
+        </g>
+
+        <!-- 行 2：M.2_1 ← Crucial P310（OS・変更点） -->
+        <g>
+          <rect x="16" y="116" width="250" height="62" rx="4" fill="#ffffff" stroke="#b4632c" stroke-width="2"/>
+          <text x="30" y="142" class="svg-silk" font-size="10" fill="#b4632c">M.2_1 — GEN4 X4（CPU 直結）</text>
+          <text x="30" y="164" font-size="13" fill="#20241f">上段 M.2 スロット</text>
+          <line x1="266" y1="147" x2="306" y2="147" stroke="#b4632c" stroke-width="3"/>
+          <rect x="306" y="116" width="438" height="62" rx="4" fill="#ffffff" stroke="#eba117" stroke-width="2.5"/>
+          <circle cx="326" cy="147" r="5" fill="#eba117"/>
+          <text x="342" y="142" font-size="14" fill="#20241f">Crucial P310 1TB（流用）— OS 用に変更</text>
+          <text x="342" y="164" class="svg-silk" font-size="10" fill="#b4632c">Windows 11 をクリーンインストール。付属ヒートシンクを装着</text>
+        </g>
+
+        <!-- 行 3：PCIe x16 ← RTX 2070 SUPER -->
+        <g>
+          <rect x="16" y="190" width="250" height="62" rx="4" fill="#143528"/>
+          <text x="30" y="216" class="svg-silk" font-size="10" fill="#d9a06b">PCIE X16 — GEN4</text>
+          <text x="30" y="238" font-size="13" fill="#e9efe9">グラフィックス用スロット</text>
+          <line x1="266" y1="221" x2="306" y2="221" stroke="#b4632c" stroke-width="3"/>
+          <rect x="306" y="190" width="438" height="62" rx="4" fill="#ffffff" stroke="#2f9e63" stroke-width="2"/>
+          <circle cx="326" cy="221" r="5" fill="#2f9e63"/>
+          <text x="342" y="216" font-size="14" fill="#20241f">RTX 2070 SUPER（流用）</text>
+          <text x="342" y="238" class="svg-silk" font-size="10" fill="#5c655d">3700X は内蔵 GPU なし——最小構成の起動確認でも必須</text>
+        </g>
+
+        <!-- 行 4：PCIe x1 ← PCE-AX58BT -->
+        <g>
+          <rect x="16" y="264" width="250" height="62" rx="4" fill="#ffffff" stroke="#b4632c" stroke-width="2"/>
+          <text x="30" y="290" class="svg-silk" font-size="10" fill="#b4632c">PCIE X1 — 3 本のうち空きの 1 本</text>
+          <text x="30" y="312" font-size="13" fill="#20241f">拡張スロット</text>
+          <line x1="266" y1="295" x2="306" y2="295" stroke="#b4632c" stroke-width="3"/>
+          <rect x="306" y="264" width="438" height="62" rx="4" fill="#ffffff" stroke="#2f9e63" stroke-width="2"/>
+          <circle cx="326" cy="295" r="5" fill="#2f9e63"/>
+          <text x="342" y="290" font-size="14" fill="#20241f">ASUS PCE-AX58BT（流用）— Wi-Fi 子機</text>
+          <text x="342" y="312" class="svg-silk" font-size="10" fill="#5c655d">GPU クーラーで塞がる 1 本を避けて装着。アンテナ接続を忘れずに</text>
+        </g>
+
+        <!-- 行 5：M.2_2 ← 空き（救出時のみ CFD） -->
+        <g>
+          <rect x="16" y="338" width="250" height="62" rx="4" fill="#ffffff" stroke="#b4632c" stroke-width="2"/>
+          <text x="30" y="364" class="svg-silk" font-size="10" fill="#b4632c">M.2_2 — GEN3 X4（チップセット）</text>
+          <text x="30" y="386" font-size="13" fill="#20241f">下段 M.2 スロット</text>
+          <line x1="266" y1="369" x2="306" y2="369" stroke="#b4632c" stroke-width="3" stroke-dasharray="7 6"/>
+          <rect x="306" y="338" width="438" height="62" rx="4" fill="#f0f2ee" stroke="#b9c2ba" stroke-width="2" stroke-dasharray="7 6"/>
+          <circle cx="326" cy="369" r="5" fill="#b9c2ba"/>
+          <text x="342" y="364" font-size="14" fill="#5c655d">空き（当面）</text>
+          <text x="342" y="386" class="svg-silk" font-size="10" fill="#5c655d">データ救出のときだけ CFD PG3VNF を一時装着する</text>
+        </g>
+
+        <!-- 隔離保管の注記行 -->
+        <g>
+          <rect x="16" y="414" width="728" height="62" rx="4" fill="#ffffff" stroke="#eba117" stroke-width="2.5"/>
+          <circle cx="36" cy="445" r="5" fill="#eba117"/>
+          <text x="52" y="440" font-size="14" fill="#20241f">CFD PG3VNF 1TB（旧 OS・要救出）— PC の外で隔離保管</text>
+          <text x="52" y="462" class="svg-silk" font-size="10" fill="#b4632c">初期化・フォーマット・chkdsk 禁止。通電は救出作業のときだけ</text>
+        </g>
+
+        <!-- 補足行 -->
+        <g>
+          <rect x="16" y="490" width="728" height="46" rx="4" fill="#f0f2ee" stroke="#d8ddd5" stroke-width="1.5"/>
+          <text x="30" y="518" class="svg-silk" font-size="11" fill="#5c655d">変更点：P310 が M.2_2 → M.2_1（OS 用）へ。M.2_2 使用時の SATA 5・6 番無効化も当面は関係なし</text>
+        </g>
+      </svg>
+      <figcaption>
+        図1：搭載計画の改訂版（オリジナルの模式図）。step2 の図2 との違いは M.2 まわりのみ——
+        P310 が OS 用として M.2_1（Gen4 CPU 直結）へ昇格し、旧 CFD は板に載せず救出対象として隔離する。
+      </figcaption>
+    </figure>
+  </section>
+
+  <section class="section">
+    <h2 class="section__heading">データ救出計画 — CFD PG3VNF から大事なデータを取り出す</h2>
+    <p>
+      旧 OS SSD には未バックアップの大事なデータが残っている。読めなくなりかけの
+      ドライブは<strong>通電とリトライのたびに状態が悪化しうる</strong>ため、
+      「読めている間に、優先度の高いものから、コピーだけ」が大原則になる。
+    </p>
+    <ul class="check-list">
+      <li><span class="led led--red" aria-hidden="true"></span><strong>初期化・フォーマット・chkdsk を実行しない</strong>——管理情報を書き換えて救出を難しくする操作はすべて禁止</li>
+      <li><span class="led led--red" aria-hidden="true"></span><strong>書き込まない</strong>——救出は読み取り（コピー）だけ。SSD 内のファイルを開いて編集・保存しない</li>
+      <li><span class="led led--amber" aria-hidden="true"></span><strong>通電は救出作業のときだけ</strong>——普段は取り外して保管する</li>
+      <li><span class="led led--green" aria-hidden="true"></span><strong>先に「救出優先リスト」を作る</strong>——書類・写真 → ブラウザのブックマーク → ゲームのセーブデータ（Steam クラウド対象外のもの）→ その他、の順に救う場所を紙に書き出しておく。コピー先の空き容量も確保しておく</li>
+    </ul>
+    <figure class="figure">
+      <svg viewBox="0 0 760 400" role="img" aria-label="データ救出のフロー。PC 復活後に新マザーの M.2_2 へ NVMe 直結で試し、認識したら SMART を確認して優先リスト順にコピーする。認識しなければ別 PC と SSD ケースで再試行し、それでもだめなら読み取り専用の復旧ソフトや専門業者を検討する">
+        <!-- 左列：試行の段階 -->
+        <g>
+          <rect x="16" y="40" width="330" height="70" rx="4" fill="#143528"/>
+          <text x="32" y="66" class="svg-silk" font-size="10" fill="#d9a06b">第 1 手 — 本命</text>
+          <text x="32" y="90" font-size="14" fill="#e9efe9">PC 復活後、新マザーの M.2_2 に直結</text>
+        </g>
+        <g>
+          <rect x="16" y="150" width="330" height="70" rx="4" fill="#ffffff" stroke="#eba117" stroke-width="2.5"/>
+          <text x="32" y="176" class="svg-silk" font-size="10" fill="#b4632c">第 2 手</text>
+          <text x="32" y="200" font-size="14" fill="#20241f">別 PC ＋ SSD ケース（USB）で再試行</text>
+        </g>
+        <g>
+          <rect x="16" y="260" width="330" height="70" rx="4" fill="#ffffff" stroke="#e5484d" stroke-width="2.5"/>
+          <text x="32" y="286" class="svg-silk" font-size="10" fill="#e5484d">最終手段</text>
+          <text x="32" y="310" font-size="14" fill="#20241f">復旧ソフト（読み取り専用）→ 専門業者</text>
+        </g>
+
+        <!-- 左列の下向き矢印（認識しない） -->
+        <g stroke="#b4632c" stroke-width="3" fill="none">
+          <line x1="120" y1="110" x2="120" y2="150"/>
+          <line x1="120" y1="220" x2="120" y2="260"/>
+        </g>
+        <path d="M 120 146 L 114 134 L 126 134 Z" fill="#b4632c"/>
+        <path d="M 120 256 L 114 244 L 126 244 Z" fill="#b4632c"/>
+        <text x="134" y="136" class="svg-silk" font-size="10" fill="#e5484d">認識しない</text>
+        <text x="134" y="246" class="svg-silk" font-size="10" fill="#e5484d">それでも認識しない</text>
+
+        <!-- 右列：コピー → 完了 -->
+        <g>
+          <rect x="420" y="40" width="324" height="180" rx="4" fill="#ffffff" stroke="#2f9e63" stroke-width="2.5"/>
+          <text x="436" y="66" class="svg-silk" font-size="10" fill="#2f9e63">認識したら</text>
+          <text x="436" y="94" font-size="14" fill="#20241f">1. CrystalDiskInfo で SMART を記録</text>
+          <text x="436" y="122" font-size="14" fill="#20241f">2. 優先リスト順にコピー（読み取りのみ）</text>
+          <text x="436" y="150" font-size="14" fill="#20241f">3. コピー先で開けることを確認</text>
+          <text x="436" y="182" class="svg-silk" font-size="10" fill="#5c655d">停滞したら順番を飛ばして先に進む——</text>
+          <text x="436" y="198" class="svg-silk" font-size="10" fill="#5c655d">1 か所で粘らない</text>
+        </g>
+        <g>
+          <rect x="420" y="260" width="324" height="70" rx="4" fill="#143528"/>
+          <circle cx="444" cy="295" r="6" fill="#2f9e63"/>
+          <text x="460" y="300" font-size="14" fill="#e9efe9">救出完了 — 別ドライブへ二重保存</text>
+        </g>
+
+        <!-- 右向き矢印（認識した） -->
+        <g stroke="#2f9e63" stroke-width="3" fill="none">
+          <line x1="346" y1="75" x2="420" y2="75"/>
+          <line x1="346" y1="185" x2="420" y2="185"/>
+          <line x1="582" y1="220" x2="582" y2="260"/>
+        </g>
+        <path d="M 416 75 L 404 69 L 404 81 Z" fill="#2f9e63"/>
+        <path d="M 416 185 L 404 179 L 404 191 Z" fill="#2f9e63"/>
+        <path d="M 582 256 L 576 244 L 588 244 Z" fill="#2f9e63"/>
+
+        <!-- 撤退基準 -->
+        <g>
+          <rect x="16" y="352" width="728" height="40" rx="4" fill="#fdf6e7" stroke="#eba117" stroke-width="1.5"/>
+          <text x="30" y="377" class="svg-silk" font-size="11" fill="#b4632c">撤退基準：読み込み停滞やエラーが頻発したら、その場で通電をやめて次の手へ（粘るほど悪化する）</text>
+        </g>
+      </svg>
+      <figcaption>
+        図2：データ救出のフロー（オリジナルの模式図）。USB ブリッジを介するケースより
+        NVMe 直結のほうが安定しやすく認識の可能性も上がるため、PC 復活後の M.2_2 直結を本命とする。
+      </figcaption>
+    </figure>
+    <p class="note">
+      第 1 手を「PC 復活後」に置くのは、マザー交換で確実に動く受け皿を先に作るため。
+      ただし第 1 段（マザー交換）で直らず第 2 段（電源交換）へ進むことになった場合は、
+      復活を待たずに第 2 手（別 PC ＋ケース）を先に試してよい。その際はケース付属の
+      放熱シートを貼り、熱がこもらない置き方で短時間勝負にする。復旧ソフトを使う場合は
+      「読み取り専用でスキャンするもの」を選び、<strong>復元先は必ず別のドライブ</strong>にする。
+      専門業者は数万〜数十万円かかるため、データの価値と天秤にかけて判断する。
+    </p>
+  </section>
+
+  <section class="section">
+    <h2 class="section__heading">組み立て手順 — 旧板から新板へ</h2>
+    <p>まず道具と下ごしらえ。作業前に次をそろえる。</p>
+    <ul class="check-list">
+      <li><span class="led" aria-hidden="true"></span><strong>Windows 11 インストール USB</strong>（8GB 以上）— 別の Windows PC で <a href="https://www.microsoft.com/ja-jp/software-download/windows11">Microsoft 公式のダウンロードページ</a>から「インストール メディアの作成」で作る</li>
+      <li><span class="led" aria-hidden="true"></span>プラスドライバー（#2）、外したネジを入れるトレー、明るいライト</li>
+      <li><span class="led" aria-hidden="true"></span>静電気対策 — 作業前に金属（ケースの金属部など）に触れて放電。カーペットの上では作業しない</li>
+      <li><span class="led" aria-hidden="true"></span>スマホ — <strong>配線を外す前に必ず写真を撮る</strong>（復旧の保険であり、この備忘録の写真素材にもなる）</li>
+      <li><span class="led" aria-hidden="true"></span>（任意）<a href="https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b550-plus/">ASUS 公式サポート</a>から TUF GAMING B550-PLUS のマニュアルとチップセット／LAN ドライバを別 USB に入れておく</li>
+    </ul>
+    <p><strong>取り外し（旧 OEM 板）</strong></p>
+    <ol>
+      <li>電源ケーブルを抜き、電源ユニット背面のスイッチを OFF。電源ボタンを数回押して残留電荷を放電する</li>
+      <li>ケース内の全景を撮影 → 24 ピン・EPS 8 ピン・フロントパネル・USB・ファンなど、<strong>ケーブルを 1 本外すごとに撮影</strong>する</li>
+      <li>GPU（補助電源 → スロットのラッチ → ブラケットのネジの順）、Wi-Fi 子機、メモリ 2 枚を外す（SSD は取り外し済み）</li>
+      <li>CPU クーラーを対角順に少しずつ緩めて外し、CPU のレバーを上げてまっすぐ持ち上げて取り出す。CPU とクーラー底面の旧グリスをティッシュ等で拭き取っておく</li>
+      <li>マザーボードのネジを外して板を取り出す。ケース側のスタンドオフ（マザーを浮かせる六角スペーサー）の位置が新しい板のネジ穴（ATX・9 か所）と一致しているか確認する</li>
+    </ol>
+    <p><strong>組み込み（TUF GAMING B550-PLUS）</strong></p>
+    <ol>
+      <li>新しい板を箱（帯電防止袋の上）に置き、CPU を装着する——CPU 角の<strong>▲マークをソケットの▲に合わせ</strong>、力をかけずに載せてレバーを倒す</li>
+      <li>メモリ 2 枚をマニュアル推奨の <strong>A2・B2 スロット</strong>へ（カチッと両端のラッチが閉じるまで）</li>
+      <li>P310 を M.2_1 に装着し、付属ヒートシンクを取り付ける（<strong>ヒートシンク裏の保護フィルムを剥がしてから</strong>）</li>
+      <li>CPU に MX-4 を塗る——中央に米粒 1.5〜2 粒分。クーラーを載せて対角順に少しずつ均等に締める</li>
+      <li><strong>I/O パネル（バックパネル）を先にケースへはめる</strong>——TUF GAMING B550-PLUS は板と別体。ケースに板を入れたあとでは取り付けられない、忘れやすさ No.1 の部品</li>
+      <li>板をケースに入れてネジ 9 本で固定し、撮っておいた写真を見ながら配線する——24 ピン／EPS 8 ピン／フロントパネル（電源スイッチ・LED はマニュアルのピン配置図参照）／USB ヘッダ／HD AUDIO／ケースファン</li>
+      <li>GPU を一番上の x16 スロットに装着して補助電源を接続、Wi-Fi 子機を空きの x1 に装着してアンテナをつなぐ</li>
+      <li>図1 と写真を見ながら、挿し忘れ・仮止めのままのネジがないか最終確認する</li>
+    </ol>
+    <p class="note">
+      慎重に進めたい場合は、ケースに入れる前に「箱の上で最小構成テスト」を挟むと切り分けが
+      楽になる——CPU＋クーラー＋メモリ 1 枚＋GPU＋電源（24 ピン・EPS・GPU 補助）だけつなぎ、
+      マニュアルの電源スイッチピンをドライバーの先で短絡して起動、BIOS 画面が出るかだけ確認する。
+      <strong>3700X は内蔵 GPU がないため、このテストでも GPU とモニタ接続は必須。</strong>
+    </p>
+  </section>
+
+  <section class="section">
+    <h2 class="section__heading">動作検証チェックリスト</h2>
+    <p>
+      電源投入からゲーム負荷まで、4 つのフェーズで段階的に確認する。フェーズ 3 まで
+      通れば本プロジェクトの完了条件（安定起動＋高負荷で暗転再発なし）を満たす。
+    </p>
+    <table class="spec-table">
+      <tbody>
+        <tr>
+          <th>フェーズ 1<br>起動確認</th>
+          <td>電源 ON → 板上の <strong>Q-LED（CPU → DRAM → VGA → BOOT）が順に消灯</strong>して UEFI（BIOS）画面が表示されるか。UEFI 上で CPU（Ryzen 7 3700X）とメモリ 32GB の認識、CPU 温度（アイドルでおおむね 40〜60℃）を確認</td>
+        </tr>
+        <tr>
+          <th>フェーズ 2<br>OS 導入</th>
+          <td>インストール USB から起動 → Windows 11 Home をクリーンインストール（プロダクトキーは「ありません」でスキップ）→ Microsoft アカウントでサインイン → 設定 → システム → ライセンス認証で「<strong>ハードウェアを最近変更しました</strong>」から再認証（詳細手順は <a href="step2-parts-procurement.html">step2</a>）</td>
+        </tr>
+        <tr>
+          <th>フェーズ 3<br>安定性検証</th>
+          <td>Windows Update 完走・チップセット／GPU／LAN ドライバ導入 → アイドル 30 分と再起動数回で異常がないこと → Steam を入れ直し、<strong>発端となったゲームを 1〜2 時間プレイして暗転・再起動が再発しない</strong>ことを確認（温度もモニタリングする）</td>
+        </tr>
+        <tr>
+          <th>フェーズ 4<br>データ救出</th>
+          <td>安定を確認できたら、M.2_2 に CFD を一時装着してデータ救出（図2 のフロー）。救出後にメモリ設定 D.O.C.P（DDR4-3200）を有効化して仕上げる</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="note">
+      メモリは最初は定格（自動設定）のまま起動し、安定を確認してから D.O.C.P を有効にする。
+      変数を 1 つずつ増やすことで、万一不調が出たときに原因を切り分けやすくする。
+    </p>
+  </section>
+
+  <section class="section">
+    <h2 class="section__heading">動かなかった場合 — 第 2 段（電源交換）へ</h2>
+    <p>
+      マザーボードを交換しても<strong>CPU・DRAM LED 点灯 → 数秒で再起動のループが続く</strong>場合は、
+      step1 の見立てどおり次点の容疑・電源ユニットの交換（650W 以上）に進む。
+      これは進行フローの「step3 → step1 へ戻る」ループにあたる。
+    </p>
+    <ul class="check-list">
+      <li><span class="led led--amber" aria-hidden="true"></span>症状が交換前と<strong>同じ</strong>（CPU・DRAM 点灯 → 再起動ループ）→ 電源が本命に昇格。第 2 段へ</li>
+      <li><span class="led led--amber" aria-hidden="true"></span>症状が交換前と<strong>変わった</strong>（点灯する LED や挙動が違う）→ 組み立てミスの可能性から先に潰す。配線写真と図1 で全接続を再点検</li>
+      <li><span class="led led--red" aria-hidden="true"></span>まったく通電しない → 24 ピン・EPS の挿し込み、電源背面スイッチ、フロントパネルの電源スイッチピンの順に確認</li>
+    </ul>
+    <p class="note">
+      新品マザーボードの初期不良という可能性もゼロではない。購入店の初期不良対応期間内に
+      フェーズ 1（BIOS 起動確認）まで済ませておくと、万一のときに交換を受けられる。
+    </p>
+  </section>
+
+  <nav class="page-nav">
+    <a href="step2-parts-procurement.html">← STEP 2 部品調達</a>
+    <span class="silk">次：STEP 4 復活完了（検証通過後）</span>
+  </nav>
+
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <p>ゲーミングPC復活ログ — 修理の進行に合わせて随時更新する備忘録。掲載している図はすべてオリジナルの模式図。</p>
+  </div>
+</footer>
+
+</body>
+</html>
