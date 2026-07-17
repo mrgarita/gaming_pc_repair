@@ -352,6 +352,20 @@ a:hover { color: var(--board); }
   color: var(--ink-soft);
 }
 
+/* 作業写真を 2 カラムで詰めて並べるグリッド（モバイルは 1 カラム） */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.1rem 1rem;
+  margin: 1rem 0;
+}
+
+.photo-grid .figure img { max-width: none; }
+
+@media (max-width: 640px) {
+  .photo-grid { grid-template-columns: 1fr; }
+}
+
 /* SVG 内で使う共通クラス */
 .svg-silk { font-family: var(--font-mono); letter-spacing: 0.06em; }
 

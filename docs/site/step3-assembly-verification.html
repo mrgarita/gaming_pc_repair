@@ -18,12 +18,13 @@
 
 <section class="hero">
   <div class="hero__inner">
-    <p class="silk silk--onboard">STEP 3 — LOG 2026-07-16</p>
+    <p class="silk silk--onboard">STEP 3 — LOG 2026-07-16 / 07-17</p>
     <h1 class="hero__title">組み立て・検証 — 部品はそろった、しかし旧 SSD に新トラブル</h1>
     <p class="hero__lead">
       マザーボードとグリスは無事に到着した。ところが交換作業を前に、旧 OS 入り SSD の
       中身を確認しようとしたら認識不良が発覚。搭載計画を「OS は P310 へクリーンインストール、
       旧 SSD はデータ救出対象として隔離」に修正したうえで、交換手順と検証チェックリストをまとめる。
+      7月17日、いよいよ実作業に着手——旧マザーボードの取り外しまで完了した（作業記録①）。
     </p>
   </div>
 </section>
@@ -317,7 +318,7 @@
         のが教訓。
       </figcaption>
     </figure>
-    <p><strong>取り外し（旧 OEM 板）</strong></p>
+    <p><strong>取り外し（旧 OEM 板）</strong>——2026-07-17 実施済み。経過と写真は下の「作業記録①」参照</p>
     <ol>
       <li>電源ケーブルを抜き、電源ユニット背面のスイッチを OFF。電源ボタンを数回押して残留電荷を放電する</li>
       <li>ケース内の全景を撮影 → 24 ピン・EPS 8 ピン・フロントパネル・USB・ファンなど、<strong>ケーブルを 1 本外すごとに撮影</strong>する</li>
@@ -350,6 +351,113 @@
       楽になる——CPU＋クーラー＋メモリ 1 枚＋GPU＋電源（24 ピン・EPS・GPU 補助）だけつなぎ、
       マニュアルの電源スイッチピンをドライバーの先で短絡して起動、BIOS 画面が出るかだけ確認する。
       <strong>3700X は内蔵 GPU がないため、このテストでも GPU とモニタ接続は必須。</strong>
+    </p>
+  </section>
+
+  <section class="section">
+    <h2 class="section__heading">作業記録① — 旧板の取り外し（2026-07-17 実施）</h2>
+    <p>
+      前節の手順に沿って、旧マザーボード（ASRock X570 Phantom Gaming 4・OEM）の取り外しを
+      実施した。10:18 に側板を開けて作業開始、12:08 に板の摘出まで完了——旧グリスの拭き取りを
+      含めて<strong>所要約 1 時間 50 分</strong>。心配していた AM4 の「スッポン」もコネクタの
+      破損もなく、トラブルゼロで前半戦を終えた。
+    </p>
+    <ol class="timeline">
+      <li><span class="led led--amber" aria-hidden="true"></span><span class="timeline__state">開始</span>10:18 作業前の全景を撮影（写真4）。以降も<strong>ケーブルを外すたびに撮影</strong>しながら進めた</li>
+      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>10:20 GPU（RTX 2070 SUPER）を取り外し——補助電源 → スロットのラッチ → ブラケットネジの順（写真5）</li>
+      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>10:37 Wi-Fi 子機（PCE-AX58BT）を取り外し、続けて M.2 ヒートシンクごと P310 を回収（写真6）</li>
+      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>10:41 メモリ 2 枚を取り外し（写真7）</li>
+      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>10:45 CPU クーラーを対角順に少しずつ緩め、<strong>軽く水平にひねってから</strong>持ち上げ——スッポンなし（写真8・9）</li>
+      <li><span class="led led--amber" aria-hidden="true"></span><span class="timeline__state">対処</span>10:46〜11:04 CPU とクーラー底面の旧グリスをティッシュで乾拭き（写真10〜12）。途中、手指消毒液の代用を検討して見送った（前節・写真3 の教訓）</li>
+      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>11:06〜11:14 フロントパネル・USB・HD AUDIO・SATA・ファンの各ケーブルを、撮影しながら 1 本ずつ取り外し（写真13〜15）</li>
+      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>11:16〜11:19 EPS 8 ピンと 24 ピンを取り外し。EPS ケーブルにはテープで目印を付けた（写真16）</li>
+      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>11:25 マザーボードの固定ネジを外す——旧板は 8 本留めだった（写真17）</li>
+      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>12:08 旧板をケースから摘出（写真18）。ケースが空になった（写真19）</li>
+      <li><span class="led led--amber" aria-hidden="true"></span><span class="timeline__state">整理</span>〜13:47 新板でも使う電源ケーブル類はケース内に残し、取り回しを整えて前半戦終了（写真20）</li>
+    </ol>
+    <div class="photo-grid">
+      <figure class="figure">
+        <img src="images/step3-removal-01-before-overview.jpg" alt="作業前のケース内部の全景。GPU・CPU クーラー・配線がすべて取り付いたままの状態" loading="lazy">
+        <figcaption>写真4：作業前の全景。配線復旧の保険として、この状態をまず記録した。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-removal-02-gpu-slot-after.jpg" alt="GPU 取り外し後の PCIe x16 スロットまわり。下段には M.2 ARMOR ヒートシンク、右には Wi-Fi 子機が残っている" loading="lazy">
+        <figcaption>写真5：GPU 取り外し後の x16 スロットまわり。ホコリの堆積が目立つ。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-removal-03-m2-armor.jpg" alt="M.2 ARMOR ヒートシンクの近接。下に P310 が収まっている" loading="lazy">
+        <figcaption>写真6：M.2 ARMOR ヒートシンク。この下の P310 はヒートシンクごと取り外して回収した。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-removal-04-ram-slots-before.jpg" alt="メモリ取り外し前の DIMM スロット。2 枚が 1 つおきのスロットに装着されている" loading="lazy">
+        <figcaption>写真7：メモリ取り外し前。装着スロットの位置（1 つおき）を記録してから抜いた。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-removal-05-cooler-grease.jpg" alt="取り外した CPU クーラーの底面。銅製ベースに白い旧グリスが残っている" loading="lazy">
+        <figcaption>写真8：クーラー底面の旧グリス。乾き気味で固着が弱く、スッポン回避に幸いした。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-removal-06-cpu-grease.jpg" alt="ソケットに残った CPU の表面に旧グリスが薄く広がっている" loading="lazy">
+        <figcaption>写真9：CPU 側の旧グリス。クーラーは水平にひねってから外したため CPU はソケットに残った。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-removal-07-grease-wipe.jpg" alt="ティッシュでクーラー底面の旧グリスを拭き取っているところ" loading="lazy">
+        <figcaption>写真10：旧グリスの拭き取り。無水エタノールがないため乾拭きで対応した。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-removal-08-cooler-clean.jpg" alt="拭き取り後のクーラー底面。銅のベースとヒートパイプがきれいになっている" loading="lazy">
+        <figcaption>写真11：拭き取り後のクーラー底面。ハニカム模様のグリス跡はうっすら残るが実用上は問題なし。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-removal-09-cpu-clean.jpg" alt="拭き取り後の Ryzen 7 3700X がソケットに収まっている" loading="lazy">
+        <figcaption>写真12：拭き取り後の CPU（Ryzen 7 3700X）。新しい板へはこのまま縁だけを持って引っ越しさせる。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-removal-10-frontpanel-before.jpg" alt="フロントパネルヘッダまわりにケーブルが接続されたままの状態" loading="lazy">
+        <figcaption>写真13：フロントパネルまわりの配線（外す前）。どの線がどこに挿さっていたかの記録。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-removal-11-frontpanel-after.jpg" alt="フロントパネルヘッダのケーブルをすべて外した状態" loading="lazy">
+        <figcaption>写真14：同じ場所の取り外し後。ヘッダの位置関係がよく見える。新板ではマニュアルのピン配置図が正。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-removal-12-sata-latch.jpg" alt="SATA ケーブルのラッチ付きコネクタの近接" loading="lazy">
+        <figcaption>写真15：SATA ケーブルはラッチ（金属のツメ）を押しながら抜く。無理に引かないのがコツ。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-removal-13-eps-tape.jpg" alt="EPS 8 ピンコネクタを抜き、ケーブルに目印のテープを付けた状態" loading="lazy">
+        <figcaption>写真16：EPS 8 ピンを取り外し、テープで目印。GPU 補助電源と形が似ているための取り違え対策。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-removal-14-screws.jpg" alt="外したマザーボード固定ネジ 8 本が床に並べてある。左上に USB ヘッダアダプタ、右上に M.2 SSD" loading="lazy">
+        <figcaption>写真17：外した固定ネジ 8 本。旧板は 8 か所留めだった——新板（ATX・9 か所）ではスタンドオフの位置と本数を要確認。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-removal-15-board-out.jpg" alt="ケースから摘出した ASRock X570 Phantom Gaming 4。CPU はソケットに残したまま" loading="lazy">
+        <figcaption>写真18：摘出した旧板。CPU は新板へ移すまでソケットに残して保護する。I/O パネルは板と一体で外れた。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-removal-16-empty-case.jpg" alt="マザーボードを取り出して空になったケース内部" loading="lazy">
+        <figcaption>写真19：空になったケース。スタンドオフの配置がこれで確認できる。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-removal-17-psu-cables.jpg" alt="ケース内に残した電源ケーブル類。EPS ケーブルには CPU と書いた黄色いテープが貼ってある" loading="lazy">
+        <figcaption>写真20：新板でも使う電源ケーブルはケースに残して整理。EPS には「CPU」の目印テープ。</figcaption>
+      </figure>
+    </div>
+    <p class="note">
+      <strong>気づき（組み込みへの申し送り）：</strong>
+      ①「外す前に撮る」の運用は効いた——とくにフロントパネルまわり（写真13・14）は
+      組み込み時の照合資料になる（ただし挿し先は新板のマニュアルが正）。
+      ② EPS ケーブルのテープ目印（写真16・20）で、形の似た GPU 補助電源との取り違えを防げる。
+      ③ ケース内はホコリが多かった——組み込み前にエアダスター等で清掃しておくと良い。
+      ④ 旧板のネジは 8 本だった（写真17）——新板は 9 か所が基本なので、スタンドオフの
+      増設が要るかケースの穴位置と合わせて確認する。
+    </p>
+    <p>
+      次の作業は後半戦＝<strong>新板（TUF GAMING B550-PLUS）への CPU 引っ越しと組み込み</strong>。
+      前節「組み込み（TUF GAMING B550-PLUS）」の手順どおり、CPU 装着 → MX-4 塗布 →
+      クーラー取り付け → I/O パネル → 配線、と進めて起動確認（フェーズ 1）に入る。
     </p>
   </section>
 
