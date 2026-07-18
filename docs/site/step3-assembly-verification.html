@@ -107,7 +107,7 @@
     </p>
     <table class="spec-table">
       <tbody>
-        <tr><th>OS ドライブ</th><td>旧 CFD PG3VNF を流用 → <strong>Crucial P310 1TB に Windows 11 をクリーンインストール</strong>（M.2_1・Gen4 CPU 直結へ配置換え。付属ヒートシンクもこちらに装着）</td></tr>
+        <tr><th>OS ドライブ</th><td>旧 CFD PG3VNF を流用 → <strong>Crucial P310 1TB に Windows 11 をクリーンインストール</strong>（M.2_1・Gen4 CPU 直結へ配置換え。M.2_1 にヒートシンクは付属しない——板の付属ヒートシンクは M.2_2 側）</td></tr>
         <tr><th>旧 CFD PG3VNF</th><td>M.2_1 に搭載 → <strong>当面 PC に組み込まない。</strong>未バックアップの大事なデータがあるため「データ救出対象」として隔離保管し、通電は救出作業のときだけにする</td></tr>
         <tr><th>M.2_2</th><td>P310（ゲーム用）→ <strong>空き。</strong>救出作業のときだけ CFD を一時装着する口として使う</td></tr>
         <tr><th>P310 の中身</th><td>インストール済みだったゲームは消えるが、Steam から再ダウンロードで復元できる</td></tr>
@@ -139,7 +139,7 @@
           <rect x="306" y="116" width="438" height="62" rx="4" fill="#ffffff" stroke="#eba117" stroke-width="2.5"/>
           <circle cx="326" cy="147" r="5" fill="#eba117"/>
           <text x="342" y="142" font-size="14" fill="#20241f">Crucial P310 1TB（流用）— OS 用に変更</text>
-          <text x="342" y="164" class="svg-silk" font-size="10" fill="#b4632c">Windows 11 をクリーンインストール。付属ヒートシンクを装着</text>
+          <text x="342" y="164" class="svg-silk" font-size="10" fill="#b4632c">Windows 11 をクリーンインストール。ヒートシンクは付属しない</text>
         </g>
 
         <!-- 行 3：PCIe x16 ← RTX 2070 SUPER -->
@@ -330,7 +330,7 @@
     <ol>
       <li>新しい板を箱（帯電防止袋の上）に置き、CPU を装着する——CPU 角の<strong>▲マークをソケットの▲に合わせ</strong>、力をかけずに載せてレバーを倒す</li>
       <li>メモリ 2 枚をマニュアル推奨の <strong>A2・B2 スロット</strong>へ（カチッと両端のラッチが閉じるまで）</li>
-      <li>P310 を M.2_1 に装着し、付属ヒートシンクを取り付ける（<strong>ヒートシンク裏の保護フィルムを剥がしてから</strong>）</li>
+      <li>P310 を M.2_1 に装着する——<strong>M.2_1 にヒートシンクは付属しない</strong>（付属ヒートシンクは M.2_2 側。そちらを使うときは裏の保護フィルムを剥がしてから）</li>
       <li>CPU に MX-4 を塗る——中央に米粒 1.5〜2 粒分（直径 4〜5mm のひと盛り）。ヘラで伸ばさなくてもクーラーの圧着で広がる。MX-4 は非導電性なので多少はみ出しても無害——少なすぎるより多すぎるほうがまし。クーラーは<strong>載せたら位置をずらさず</strong>、対角順に「全体を仮締め → もう 1 周で本締め」の 2 段階で均等に締める。最後に<strong>ファンケーブルを CPU_FAN ヘッダへ接続</strong>（忘れると起動時に CPU Fan Error で止まる、挿し忘れの定番）</li>
       <li><strong>I/O パネル（バックパネル）を先にケースへはめる</strong>——TUF GAMING B550-PLUS は板と別体。ケースに板を入れたあとでは取り付けられない、忘れやすさ No.1 の部品</li>
       <li>板をケースに入れてネジ 9 本で固定し、撮っておいた写真を見ながら配線する——24 ピン／EPS 8 ピン／フロントパネル（電源スイッチ・LED はマニュアルのピン配置図参照）／USB ヘッダ／HD AUDIO／ケースファン</li>
@@ -365,13 +365,13 @@
     <ol class="timeline">
       <li><span class="led led--amber" aria-hidden="true"></span><span class="timeline__state">開始</span>10:18 作業前の全景を撮影（写真4）。以降も<strong>ケーブルを外すたびに撮影</strong>しながら進めた</li>
       <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>10:20 GPU（RTX 2070 SUPER）を取り外し——補助電源 → スロットのラッチ → ブラケットネジの順（写真5）</li>
-      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>10:37 Wi-Fi 子機（PCE-AX58BT）を取り外し、続けて M.2 ヒートシンクごと P310 を回収（写真6）</li>
+      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>10:37 Wi-Fi 子機（PCE-AX58BT）を取り外し、続けて M.2 ヒートシンクごと CFD PG3VNF（旧 OS・救出対象）を回収（写真6）</li>
       <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>10:41 メモリ 2 枚を取り外し（写真7）</li>
       <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>10:45 CPU クーラーを対角順に少しずつ緩め、<strong>軽く水平にひねってから</strong>持ち上げ——スッポンなし（写真8・9）</li>
       <li><span class="led led--amber" aria-hidden="true"></span><span class="timeline__state">対処</span>10:46〜11:04 CPU とクーラー底面の旧グリスをティッシュで乾拭き（写真10〜12）。途中、手指消毒液の代用を検討して見送った（前節・写真3 の教訓）</li>
       <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>11:06〜11:14 フロントパネル・USB・HD AUDIO・SATA・ファンの各ケーブルを、撮影しながら 1 本ずつ取り外し（写真13〜15）</li>
       <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>11:16〜11:19 EPS 8 ピンと 24 ピンを取り外し。EPS ケーブルにはテープで目印を付けた（写真16）</li>
-      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>11:25 マザーボードの固定ネジを外す——旧板は 8 本留めだった（写真17）</li>
+      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>11:25 マザーボードの固定ネジを外す——旧板は 7 本留めだった（写真17）</li>
       <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>12:08 旧板をケースから摘出（写真18）。ケースが空になった（写真19）</li>
       <li><span class="led led--amber" aria-hidden="true"></span><span class="timeline__state">整理</span>〜13:47 新板でも使う電源ケーブル類はケース内に残し、取り回しを整えて前半戦終了（写真20）</li>
     </ol>
@@ -385,8 +385,8 @@
         <figcaption>写真5：GPU 取り外し後の x16 スロットまわり。ホコリの堆積が目立つ。</figcaption>
       </figure>
       <figure class="figure">
-        <img src="images/step3-removal-03-m2-armor.jpg" alt="M.2 ARMOR ヒートシンクの近接。下に P310 が収まっている" loading="lazy">
-        <figcaption>写真6：M.2 ARMOR ヒートシンク。この下の P310 はヒートシンクごと取り外して回収した。</figcaption>
+        <img src="images/step3-removal-03-m2-armor.jpg" alt="M.2 ARMOR ヒートシンクの近接。下に CFD PG3VNF が収まっている" loading="lazy">
+        <figcaption>写真6：M.2 ARMOR ヒートシンク。この下の CFD PG3VNF（旧 OS・救出対象）はヒートシンクごと取り外して回収した。</figcaption>
       </figure>
       <figure class="figure">
         <img src="images/step3-removal-04-ram-slots-before.jpg" alt="メモリ取り外し前の DIMM スロット。2 枚が 1 つおきのスロットに装着されている" loading="lazy">
@@ -429,8 +429,8 @@
         <figcaption>写真16：EPS 8 ピンを取り外し、テープで目印。GPU 補助電源と形が似ているための取り違え対策。</figcaption>
       </figure>
       <figure class="figure">
-        <img src="images/step3-removal-14-screws.jpg" alt="外したマザーボード固定ネジ 8 本が床に並べてある。左上に USB ヘッダアダプタ、右上に M.2 SSD" loading="lazy">
-        <figcaption>写真17：外した固定ネジ 8 本。旧板は 8 か所留めだった——新板（ATX・9 か所）ではスタンドオフの位置と本数を要確認。</figcaption>
+        <img src="images/step3-removal-14-screws.jpg" alt="外したマザーボード固定ネジ 7 本が床に並べてある。左上に USB ヘッダアダプタ、右上に M.2 SSD" loading="lazy">
+        <figcaption>写真17：外した固定ネジ 7 本。旧板は 7 か所留めだった——新板（ATX・9 か所）ではスタンドオフの位置と本数を要確認。</figcaption>
       </figure>
       <figure class="figure">
         <img src="images/step3-removal-15-board-out.jpg" alt="ケースから摘出した ASRock X570 Phantom Gaming 4。CPU はソケットに残したまま" loading="lazy">
@@ -451,7 +451,7 @@
       組み込み時の照合資料になる（ただし挿し先は新板のマニュアルが正）。
       ② EPS ケーブルのテープ目印（写真16・20）で、形の似た GPU 補助電源との取り違えを防げる。
       ③ ケース内はホコリが多かった——組み込み前にエアダスター等で清掃しておくと良い。
-      ④ 旧板のネジは 8 本だった（写真17）——新板は 9 か所が基本なので、スタンドオフの
+      ④ 旧板のネジは 7 本だった（写真17）——新板は 9 か所が基本なので、スタンドオフの
       増設が要るかケースの穴位置と合わせて確認する。
     </p>
     <p>

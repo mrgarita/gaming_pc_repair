@@ -16,7 +16,7 @@ OS は Crucial P310 に Windows 11 をクリーンインストールする方針
 「B550 先行交換 → 直らなければ電源」の二段構えのまま。交換手順・4 フェーズの
 検証チェックリスト・データ救出計画は step3 ページ参照。次アクション＝ユーザーの
 実作業の後半（新板へ CPU 引っ越し・組み込み → 起動確認 → OS 導入 → 検証 →
-データ救出。旧板のネジは 8 本だった＝新板は 9 か所なのでスタンドオフ要確認）。備忘録サイト
+データ救出。旧板のネジは 7 本だった＝新板は 9 か所なのでスタンドオフ要確認）。備忘録サイト
 `docs/site/`（`index.html`・`step1-current-status.html`・`step2-parts-procurement.html`・
 `step3-assembly-verification.html`・`style.css`・`images/`）を運用中。「正」となるファイルは `project.txt`（プロジェクト全体の手順）と
 `docs/` 直下の 2 文書（`PCトラブル経過まとめ.html`＝故障経過と切り分け状況、
