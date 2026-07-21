@@ -18,13 +18,15 @@
 
 <section class="hero">
   <div class="hero__inner">
-    <p class="silk silk--onboard">STEP 3 — LOG 2026-07-16 / 07-17</p>
-    <h1 class="hero__title">組み立て・検証 — 部品はそろった、しかし旧 SSD に新トラブル</h1>
+    <p class="silk silk--onboard">STEP 3 — LOG 2026-07-16 / 07-17 / 07-20</p>
+    <h1 class="hero__title">組み立て・検証 — 新板を組み込み、BIOS 起動まで到達</h1>
     <p class="hero__lead">
       マザーボードとグリスは無事に到着した。ところが交換作業を前に、旧 OS 入り SSD の
       中身を確認しようとしたら認識不良が発覚。搭載計画を「OS は P310 へクリーンインストール、
       旧 SSD はデータ救出対象として隔離」に修正したうえで、交換手順と検証チェックリストをまとめる。
-      7月17日、いよいよ実作業に着手——旧マザーボードの取り外しまで完了した（作業記録①）。
+      7月17日に旧マザーボードの取り外しまで完了し（作業記録①）、<strong>7月20日には新板への組み込みを終えて
+      電源投入——BIOS が一発起動し、CPU・メモリ 32GB・OS 用 SSD をすべて認識した（作業記録②）。</strong>
+      検証チェックリストのフェーズ 1 は実質クリア。次はいよいよ OS 導入へ。
     </p>
   </div>
 </section>
@@ -457,7 +459,203 @@
     <p>
       次の作業は後半戦＝<strong>新板（TUF GAMING B550-PLUS）への CPU 引っ越しと組み込み</strong>。
       前節「組み込み（TUF GAMING B550-PLUS）」の手順どおり、CPU 装着 → MX-4 塗布 →
-      クーラー取り付け → I/O パネル → 配線、と進めて起動確認（フェーズ 1）に入る。
+      クーラー取り付け → I/O パネル → 配線、と進めて起動確認（フェーズ 1）に入る——
+      その顛末が次の「作業記録②」。
+    </p>
+  </section>
+
+  <section class="section">
+    <h2 class="section__heading">作業記録② — 新板への組み込みと BIOS 起動（2026-07-20 実施）</h2>
+    <p>
+      前節の手順に沿って、新マザーボード（ASUS TUF GAMING B550-PLUS）への CPU 引っ越しと
+      組み込みを実施した。CPU・メモリ・P310 の仮装着は 7/17（旧板取り外しと同日）に済ませてあり、
+      この日は 11 時ごろにグリス塗布から本組みを開始。昼をはさんで配線・GPU 装着まで進め、
+      <strong>14:40 に電源を入れると UEFI（BIOS）画面が表示された——一発起動、大きなトラブルなし。</strong>
+      BIOS は CPU（Ryzen 7 3700X）・メモリ 32GB・OS 用の Crucial P310 をすべて認識しており、
+      検証チェックリストの<strong>フェーズ 1（起動確認）は実質クリア</strong>。step1 以来の
+      「マザーボードが最有力」という見立てと矛盾しない結果になった。
+    </p>
+    <ol class="timeline">
+      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">下ごしらえ</span>〔7/17〕新板を開封し、CPU（Ryzen 7 3700X）・メモリ 2 枚・P310 を仮装着（写真21・22）。グリスは本組み当日に塗るため、ここではまだ塗らない</li>
+      <li><span class="led led--amber" aria-hidden="true"></span><span class="timeline__state">開始</span>11:07 CPU グリス（MX-4）とヘラを準備（写真23）</li>
+      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>11:08 CPU の中央に<strong>米粒大のグリスをひと盛り</strong>（写真24）。MX-4 は非導電性なので多少はみ出しても無害</li>
+      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>11:09〜11:16 クーラーを載せて対角に締め、<strong>CPU_FAN ヘッダにファンケーブルを接続</strong>（写真25・26）</li>
+      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>11:17〜11:20 <strong>I/O シールドを先にケースへはめ</strong>、板をケースに載せてネジ留め（写真27）</li>
+      <li><span class="led led--amber" aria-hidden="true"></span><span class="timeline__state">対処</span>作業中、ケース金具のエッジで指を軽く切った（軽傷）。以後は板やシャーシの縁に注意して進めた</li>
+      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>11:54〜13:10 フロントパネル・USB・HD AUDIO の各ヘッダを確認しながら配線に着手（写真28・29）</li>
+      <li><span class="led led--amber" aria-hidden="true"></span><span class="timeline__state">気づき</span>13:09〜13:32 フロントパネル一体コネクタは、<strong>新板 PANEL ヘッダの左 4 列へそのまま直挿しできる</strong>と判明（当日いったん「配列が合わず要抜線」と誤判断 → 実物のシルク照合で訂正。写真30〜32・下の図3）</li>
+      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>13:22 HD AUDIO（旧板の HD_AUDIO＝新板では <strong>AAFP</strong> 表記）を接続（写真33）</li>
+      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>〜13:21 前面 USB×2・カードリーダーを接続（USB_E12・E34 の両方を使用）、24 ピン ATX を挿す（写真34・35）</li>
+      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>13:43〜14:04 GPU（RTX 2070 SUPER）を x16 に装着して補助電源を接続、全体を最終確認（写真36〜39）</li>
+      <li><span class="led led--amber" aria-hidden="true"></span><span class="timeline__state">通電</span>14:39 電源投入——基板の待機 LED（緑）が点灯し、クーラーが回転。Q-LED は引っかからずに消灯（写真40）</li>
+      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">起動</span>14:40 <strong>UEFI（BIOS）画面が表示。CPU・メモリ 32GB・M.2_1 の P310 を認識</strong>（写真41・下の表）</li>
+    </ol>
+
+    <div class="photo-grid">
+      <figure class="figure">
+        <img src="images/step3-assembly-01-box.jpg" alt="ASUS TUF GAMING B550-PLUS の製品箱。Windows 11 Ready、AMD B550、Socket AM4 のロゴが並ぶ" loading="lazy">
+        <figcaption>写真21：新マザーボード ASUS TUF GAMING B550-PLUS の箱。右下の店舗シールはぼかし加工。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-assembly-02-dryfit-overview.jpg" alt="帯電防止袋の上に置いた新板の全景。CPU・メモリ 2 枚・M.2 SSD を仮装着した状態" loading="lazy">
+        <figcaption>写真22：7/17 の下ごしらえ。新板に CPU・メモリ 2 枚・P310 を仮装着した全景（シリアル類はぼかし）。ここから 7/20 の本組みに入る。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-assembly-03-mx4.jpg" alt="CPU グリス ARCTIC MX-4 のシリンジと付属ヘラ、外箱" loading="lazy">
+        <figcaption>写真23：CPU グリス ARCTIC MX-4（4g）。付属ヘラで伸ばさず、クーラーの圧着で広げる方針。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-assembly-04-cpu-grease.jpg" alt="ソケットに装着した Ryzen 7 3700X の中央に、米粒大のグレーのグリスを盛った状態" loading="lazy">
+        <figcaption>写真24：CPU（Ryzen 7 3700X）中央に米粒大のグリスをひと盛り。QR・製品番号はぼかし、グリスの量が分かるようにした。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-assembly-05-cooler.jpg" alt="CPU クーラーを載せる直前の近接。銅ヒートパイプの下に M.2 SSD が見える" loading="lazy">
+        <figcaption>写真25：クーラーを載せる直前。下に OS 用の Crucial P310（M.2_1・Gen4 CPU 直結）が見える。右のメモリのバーコードはぼかし。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-assembly-06-cpufan.jpg" alt="CPU_FAN／CPU_OPT ヘッダにファンケーブルを接続しようとしているところ" loading="lazy">
+        <figcaption>写真26：<strong>CPU_FAN ヘッダ</strong>にファンケーブルを接続。挿し忘れると起動時に CPU Fan Error で止まる定番の落とし穴。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-assembly-07-ioshield.jpg" alt="ASUS TUF GAMING B550-PLUS の I/O シールドの単体写真" loading="lazy">
+        <figcaption>写真27：I/O シールドは板と別体。<strong>ケースへ先にはめる</strong>——板を入れたあとでは付けられない、忘れやすさ No.1 の部品。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-assembly-08-panel-silk.jpg" alt="基板右下のヘッダ群のシルク印字。PANEL、USB_2_3、USB3_9_10、CLRCMOS1、SATA3 などが読める" loading="lazy">
+        <figcaption>写真28：基板右下のヘッダのシルク印字（PANEL／USB_2_3／USB3_9_10／CLRCMOS1／SATA3）。挿し先はこのシルクとマニュアルが正。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-assembly-09-usb-compare.jpg" alt="手に持った 2 つの内部コネクタ。左は「USB」印字あり、右は無印字の 10 穴コネクタ" loading="lazy">
+        <figcaption>写真29：前面 USB コネクタ（「USB」印字・左）とカードリーダーの無印字 10 穴コネクタ（右）。形が似て紛らわしいので向きに注意。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-assembly-10-oldpanel.jpg" alt="旧マザーボードの PANEL1 ヘッダを赤枠で囲んだ写真。+PLED +PWRBTN／+HDLED +RESET のシルク" loading="lazy">
+        <figcaption>写真30：旧板 PANEL1 の配列（赤枠）。上段 +PLED／+PWRBTN、下段 +HDLED／+RESET。一体コネクタはここに挿さっていた。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-assembly-11-newpanel.jpg" alt="新マザーボードの PANEL ヘッダ左 4 列を赤枠で囲んだ写真。PWR_LED PWR_SW／HDD_LED RESET のシルク" loading="lazy">
+        <figcaption>写真31：新板 20-3 PANEL ヘッダの左 4 列（赤枠）。上段 +PWR_LED−／PWR_SW、下段 +HDD_LED−／RESET＝旧板と同じ Intel 標準配列。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-assembly-12-frontpanel-inserted.jpg" alt="フロントパネル一体コネクタを新板 PANEL ヘッダの左 4 列へ直挿しし、USB_E12 も接続した状態" loading="lazy">
+        <figcaption>写真32：一体コネクタを PANEL ヘッダの<strong>左端に合わせて直挿し</strong>。USB_E12 も接続済み。5 列目のキー（塞ぎ穴）が向きを決める。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-assembly-13-hdaudio.jpg" alt="HD AUDIO（AAFP）ヘッダに前面オーディオのコネクタを接続した状態" loading="lazy">
+        <figcaption>写真33：HD AUDIO（旧板の HD_AUDIO＝新板では基板左下の <strong>AAFP</strong> 表記）を接続。機能は同じ。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-assembly-14-cardreader.jpg" alt="前面カードリーダーの内部 USB コネクタを手に持ったところ" loading="lazy">
+        <figcaption>写真34：前面カードリーダーの内部 USB コネクタ。前面 USB とあわせて USB_E12・USB_E34 の両方を使う。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-assembly-15-24pin.jpg" alt="24 ピン ATX 電源コネクタとメモリスロット、電源ケーブルの取り回し" loading="lazy">
+        <figcaption>写真35：24 ピン ATX 電源を接続（ラッチが鳴るまで挿す）。メモリはマニュアル推奨の A2・B2 スロット。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-assembly-16-gpu.jpg" alt="GeForce RTX のグラフィックスカードに補助電源ケーブルを接続したところ" loading="lazy">
+        <figcaption>写真36：GPU（RTX 2070 SUPER）を一番上の x16 に装着し、補助電源を接続。3700X は内蔵 GPU なしのため起動確認にも必須。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-assembly-17-cooler-overview.jpg" alt="AMD 純正クーラーとメモリ 2 枚、DIMM_A1〜B2 のスロット表示" loading="lazy">
+        <figcaption>写真37：CPU クーラー（AMD 純正 Wraith）とメモリ 2 枚。DIMM_A2・B2 に装着している。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-assembly-18-complete.jpg" alt="配線を終えたケース内部の全景。GPU、クーラー、電源ケーブルが収まっている" loading="lazy">
+        <figcaption>写真38：配線を終えたケース内部（完成）。左レールのラベルはぼかし加工。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-assembly-19-rear-io.jpg" alt="ケース背面から見た I/O パネル。2.5G LAN、USB、DisplayPort、HDMI、音声端子" loading="lazy">
+        <figcaption>写真39：背面 I/O（外から）。2.5G LAN・多数の USB・DisplayPort・HDMI・音声端子がそろう。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-assembly-20-poweron-led.jpg" alt="通電した基板。緑の待機 LED が点灯し、クーラーが回転している" loading="lazy">
+        <figcaption>写真40：通電。基板の待機 LED（緑）が点灯し、クーラーが回転。Q-LED は引っかからずに消灯した。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-assembly-21-bios.jpg" alt="モニタに表示された American Megatrends の BIOS 起動画面。CPU・メモリ・M.2 SSD の認識内容が並ぶ" loading="lazy">
+        <figcaption>写真41：<strong>BIOS（UEFI）起動成功。</strong>CPU・メモリ 32GB・M.2_1 の Crucial P310 を認識している。内容は下の表。</figcaption>
+      </figure>
+    </div>
+
+    <p><strong>BIOS が認識した構成（POST 画面）</strong></p>
+    <table class="spec-table">
+      <tbody>
+        <tr><th>板／BIOS</th><td>ASUS TUF GAMING B550-PLUS ／ AMIBIOS 2025・ACPI BIOS Revision 3636</td></tr>
+        <tr><th>CPU</th><td>AMD Ryzen 7 3700X 8-Core（3600MHz）— <strong>認識</strong></td></tr>
+        <tr><th>メモリ</th><td>32768MB（DDR4-3200）— <strong>32GB 全量を認識</strong></td></tr>
+        <tr><th>M.2_1</th><td>CT1000P310SSD8（Crucial P310・OS 用）— <strong>認識</strong></td></tr>
+        <tr><th>SATA6G_4</th><td>HL-DT-ST BD-RE BU40N（内蔵 Blu-ray ドライブ）— 検出</td></tr>
+        <tr><th>メッセージ</th><td>「New CPU installed! Please enter Setup」（板交換後の通常表示）／「NO Keyboard Detected! Press F1 to Run SETUP」（この起動時はキーボード未接続）</td></tr>
+      </tbody>
+    </table>
+    <p class="note">
+      <strong>メモリ表示について：</strong>POST の「DDR4-3200」は<strong>メモリ側の定格表示</strong>で、
+      D.O.C.P（XMP 相当）を有効化したという意味ではない可能性が高い。計画どおり、まずは定格（自動設定）の
+      まま安定を確認し、<strong>D.O.C.P はデータ救出まで終えてから</strong>有効化する。実際の動作クロックは
+      UEFI の Memory 項目で要確認。
+    </p>
+
+    <figure class="figure">
+      <svg viewBox="0 0 760 300" role="img" aria-label="フロントパネル一体コネクタの直挿しの図。新板 20-3 PANEL ヘッダの左 4 列は旧板 PANEL1 と同じ配列（上段 PWR_LED・PWR_SW、下段 HDD_LED・RESET）で、5 列目のキー（塞ぎ穴）が向きを決める。右側の SPEAKER と予備 PWR_LED は空きのまま。左端に合わせて挿す">
+        <text x="16" y="26" class="svg-silk" font-size="11" fill="#b4632c">図3：フロントパネル一体コネクタ ― 新板 20-3 PANEL ヘッダ（基板下端右角）への直挿し</text>
+
+        <!-- ヘッダ全体の枠 -->
+        <rect x="16" y="52" width="728" height="150" rx="6" fill="#0d2419"/>
+
+        <!-- 左4列＝フロントパネル（直挿し部） -->
+        <rect x="30" y="66" width="300" height="122" rx="4" fill="#143528" stroke="#eba117" stroke-width="2.5"/>
+        <text x="40" y="86" class="svg-silk" font-size="10" fill="#eba117">左 4 列＝一体コネクタを直挿し（旧板 PANEL1 と同配列）</text>
+        <!-- 上段 -->
+        <rect x="44"  y="98"  width="128" height="34" rx="3" fill="#ffffff"/>
+        <text x="108" y="120" font-size="13" fill="#20241f" text-anchor="middle">+PWR_LED−</text>
+        <rect x="184" y="98"  width="128" height="34" rx="3" fill="#ffffff"/>
+        <text x="248" y="120" font-size="13" fill="#20241f" text-anchor="middle">PWR_SW</text>
+        <!-- 下段 -->
+        <rect x="44"  y="146" width="128" height="34" rx="3" fill="#ffffff"/>
+        <text x="108" y="168" font-size="13" fill="#20241f" text-anchor="middle">+HDD_LED−</text>
+        <rect x="184" y="146" width="128" height="34" rx="3" fill="#ffffff"/>
+        <text x="248" y="168" font-size="13" fill="#20241f" text-anchor="middle">RESET</text>
+
+        <!-- 5列目＝キー -->
+        <rect x="342" y="66" width="70" height="122" rx="4" fill="#143528" stroke="#d9a06b" stroke-width="1.5" stroke-dasharray="6 5"/>
+        <text x="377" y="120" class="svg-silk" font-size="10" fill="#d9a06b" text-anchor="middle">5列目</text>
+        <text x="377" y="140" class="svg-silk" font-size="10" fill="#d9a06b" text-anchor="middle">キー</text>
+        <text x="377" y="160" class="svg-silk" font-size="9" fill="#d9a06b" text-anchor="middle">(塞ぎ穴)</text>
+
+        <!-- 右側＝SPEAKER・予備（空き） -->
+        <rect x="424" y="66" width="306" height="122" rx="4" fill="#0d2419" stroke="#b9c2ba" stroke-width="1.5" stroke-dasharray="6 5"/>
+        <text x="577" y="120" font-size="13" fill="#b9c2ba" text-anchor="middle">SPEAKER・予備 +PWR_LED−</text>
+        <text x="577" y="146" class="svg-silk" font-size="10" fill="#b9c2ba" text-anchor="middle">空きのままで OK</text>
+
+        <!-- 左端合わせの矢印 -->
+        <text x="30" y="228" class="svg-silk" font-size="11" fill="#b4632c">① ヘッダ左端にブロック左端を合わせる（右へ 1 列ズレると SPEAKER 側 +5V に触れる恐れ）</text>
+        <text x="30" y="250" class="svg-silk" font-size="11" fill="#b4632c">② 向きは 5 列目のキー＝ブロックの塞ぎ穴が合う向きが正解。刺さらないときは無理に押し込まない</text>
+        <text x="30" y="272" class="svg-silk" font-size="11" fill="#b4632c">③ 旧板でも同じ左 4 列配列だったため、一体コネクタはそのまま引っ越せた</text>
+      </svg>
+      <figcaption>
+        図3：フロントパネル一体コネクタの直挿し（オリジナルの模式図）。新板 PANEL ヘッダの左 4 列は
+        旧板 PANEL1 と同じ配列で、一体コネクタを左端合わせで直挿しできる。当日いったん
+        「配列が合わず要抜線」と誤判断したが、実物のシルク照合で取り消した——<strong>迷ったら
+        現物のシルク印字とマニュアルで確認する</strong>のが教訓。
+      </figcaption>
+    </figure>
+
+    <p class="note">
+      <strong>気づき（次工程への申し送り）：</strong>
+      ① BIOS が P310・32GB・CPU をすべて認識し、起動ループも暗転も POST では再発しなかった——
+      マザーボード交換（第 1 段）で改善した公算が大きい。ただし完了条件（高負荷で暗転が再発しないこと）は
+      フェーズ 3 まで要確認で、電源交換の二段構えは残す。
+      ② この起動時は<strong>キーボード未接続</strong>だった（POST に「NO Keyboard Detected」）。
+      UEFI 設定と OS インストールには USB キーボードを接続してから進める。
+      ③ 旧板の HD_AUDIO は新板では <strong>AAFP</strong> 表記、前面カードリーダーは内部 USB
+      （USB_E12・E34 の両方）で接続。旧板で使っていた USB ヘッダアダプタは新板では不要だった。
+      ④ SATA に<strong>内蔵 Blu-ray ドライブ（BU40N）</strong>がつながっていることも BIOS で確認できた。
+    </p>
+    <p>
+      次はフェーズ 2＝<strong>P310 への Windows 11 クリーンインストール</strong>と
+      Microsoft アカウントでの再認証。続けてフェーズ 3（ドライバ導入と高負荷検証）、
+      フェーズ 4（旧 SSD からのデータ救出）へと進む。
     </p>
   </section>
 
@@ -471,7 +669,7 @@
       <tbody>
         <tr>
           <th>フェーズ 1<br>起動確認</th>
-          <td>電源 ON → 板上の <strong>Q-LED（CPU → DRAM → VGA → BOOT）が順に消灯</strong>して UEFI（BIOS）画面が表示されるか。UEFI 上で CPU（Ryzen 7 3700X）とメモリ 32GB の認識、CPU 温度（アイドルでおおむね 40〜60℃）を確認</td>
+          <td><span class="led led--green" aria-hidden="true"></span><strong>2026-07-20 通過（作業記録②）。</strong>電源 ON → 板上の <strong>Q-LED（CPU → DRAM → VGA → BOOT）が順に消灯</strong>して UEFI（BIOS）画面が表示されるか。UEFI 上で CPU（Ryzen 7 3700X）とメモリ 32GB の認識、CPU 温度（アイドルでおおむね 40〜60℃）を確認。<strong>→ BIOS が CPU・32GB・P310 を認識して起動。残りは UEFI 上での温度確認</strong></td>
         </tr>
         <tr>
           <th>フェーズ 2<br>OS 導入</th>
