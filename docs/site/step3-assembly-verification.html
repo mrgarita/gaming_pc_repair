@@ -480,7 +480,7 @@
       <li><span class="led led--amber" aria-hidden="true"></span><span class="timeline__state">開始</span>11:07 CPU グリス（MX-4）とヘラを準備（写真23）</li>
       <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>11:08 CPU の中央に<strong>米粒大のグリスをひと盛り</strong>（写真24）。MX-4 は非導電性なので多少はみ出しても無害</li>
       <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>11:09〜11:16 クーラーを載せて対角に締め、<strong>CPU_FAN ヘッダにファンケーブルを接続</strong>（写真25・26）</li>
-      <li><span class="led led--amber" aria-hidden="true"></span><span class="timeline__state">対処</span>11:17〜11:20 <strong>I/O シールドを先にケースへはめ</strong>、板をケースに載せてネジ留め（写真27・28）。<strong>手持ちのネジが 7 本で、ATX の 9 か所のうち 7 か所を固定・残り 2 か所は未固定（写真29）</strong>——後日ネジを足して締める</li>
+      <li><span class="led led--amber" aria-hidden="true"></span><span class="timeline__state">対処</span>11:17〜11:20 <strong>I/O シールドを先にケースへはめ</strong>、板をケースに載せてネジ留め（写真27・28）。<strong>ケース側のスタンドオフが 7 か所しか立っていないため、その 7 か所で固定・残り 2 か所は未固定（写真29）</strong>——実用上は問題ないと判断（ただし 24 ピンを挿すときは基板がややぐらつくので注意）</li>
       <li><span class="led led--amber" aria-hidden="true"></span><span class="timeline__state">対処</span>作業中、ケース金具のエッジで指を軽く切った（軽傷）。以後は板やシャーシの縁に注意して進めた</li>
       <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>11:54〜13:10 フロントパネル・USB・HD AUDIO の各ヘッダを確認しながら配線に着手（写真30）</li>
       <li><span class="led led--amber" aria-hidden="true"></span><span class="timeline__state">気づき</span>13:09〜13:32 フロントパネル一体コネクタは、<strong>新板 PANEL ヘッダの左 4 列へそのまま直挿しできる</strong>と判明（当日いったん「配列が合わず要抜線」と誤判断 → 実物のシルク照合で訂正。写真31〜33・下の図3）</li>
@@ -525,8 +525,8 @@
         <figcaption>写真28：I/O シールドをケース背面の開口にはめ込んだ状態（内側から）。この上に板を載せて位置を合わせる。</figcaption>
       </figure>
       <figure class="figure">
-        <img src="images/step3-assembly-09-screws.jpg" alt="新板の上面図に、ネジ止めした 7 か所を赤丸、ネジが足りず未固定の 2 か所を青丸で示した図。シリアル類はぼかし" loading="lazy">
-        <figcaption>写真29：板をケースに固定したネジ位置。<strong>赤丸＝ネジ止めした 7 か所、青丸＝ネジが足りず未固定の 2 か所</strong>（後日ネジを足して締める）。シリアル類はぼかし加工。</figcaption>
+        <img src="images/step3-assembly-09-screws.jpg" alt="新板の上面図に、スタンドオフがありネジ止めした 7 か所を赤丸、スタンドオフがなく未固定の 2 か所を青丸で示した図。シリアル類はぼかし" loading="lazy">
+        <figcaption>写真29：板をケースに固定したネジ位置。<strong>赤丸＝ケース側スタンドオフがありネジ止めした 7 か所、青丸＝スタンドオフがなく未固定の 2 か所</strong>。実用上は問題ないと判断（24 ピン挿入時は基板がややぐらつくので注意）。シリアル類はぼかし加工。</figcaption>
       </figure>
       <figure class="figure">
         <img src="images/step3-assembly-10-usb-compare.jpg" alt="手に持った 2 つの内部コネクタ。左は「USB」印字あり、右は無印字の 10 穴コネクタ" loading="lazy">
@@ -655,8 +655,9 @@
       ③ 旧板の HD_AUDIO は新板では <strong>AAFP</strong> 表記、前面カードリーダーは内部 USB
       （USB_E12・E34 の両方）で接続。旧板で使っていた USB ヘッダアダプタは新板では不要だった。
       ④ SATA に<strong>内蔵 Blu-ray ドライブ（BU40N）</strong>がつながっていることも BIOS で確認できた。
-      ⑤ 板の固定は<strong>手持ちのネジ 7 本で 7 か所のみ</strong>（ATX の 9 か所のうち 2 か所は未固定・写真29）。
-      起動には支障ないが、たわみ防止のため<strong>後日ネジ（インチネジ #6-32）を 2 本足して締める</strong>。
+      ⑤ 板の固定は<strong>ケース側スタンドオフのある 7 か所のみ</strong>（ATX の 9 か所のうち 2 か所はスタンドオフがなく未固定・写真29）。
+      実用上は問題ないと判断したが、<strong>24 ピンを挿すときは基板がややぐらつく</strong>ので注意。気になる場合はスタンドオフを 2 か所
+      足せば全 9 か所を固定できる。
     </p>
     <p>
       次はフェーズ 2＝<strong>P310 への Windows 11 クリーンインストール</strong>と
