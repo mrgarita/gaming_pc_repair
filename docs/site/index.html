@@ -26,14 +26,14 @@
       部品交換、復活までの経過を、この備忘録に残していく。
     </p>
     <div class="status-board">
-      <p class="status-board__title">MACHINE STATUS — 診断LED（現在の症状）</p>
+      <p class="status-board__title">MACHINE STATUS — 診断LED（現在の状態）</p>
       <ul class="status-board__leds">
-        <li><span class="led led--red led--cycle" aria-hidden="true"></span>CPU</li>
-        <li><span class="led led--red led--cycle" aria-hidden="true"></span>DRAM</li>
-        <li><span class="led" aria-hidden="true"></span>VGA</li>
-        <li><span class="led" aria-hidden="true"></span>BOOT</li>
+        <li><span class="led led--green" aria-hidden="true"></span>CPU</li>
+        <li><span class="led led--green" aria-hidden="true"></span>DRAM</li>
+        <li><span class="led led--green" aria-hidden="true"></span>VGA</li>
+        <li><span class="led led--green" aria-hidden="true"></span>BOOT</li>
       </ul>
-      <p class="status-board__note">CPU・DRAM が同時点灯し、数秒後に再起動を繰り返す（2026-07 時点）</p>
+      <p class="status-board__note">マザーボード交換後は一発起動し、Windows 11 の導入まで完了。高負荷での安定性検証（フェーズ3）はこれから（2026-07-22 時点）</p>
     </div>
   </div>
 </section>
@@ -130,15 +130,17 @@
       <li class="doc-card">
         <div class="doc-card__meta">
           <span class="silk">STEP 3</span>
-          <span class="silk">2026-07-16 · UPD 2026-07-20</span>
+          <span class="silk">2026-07-16 · UPD 2026-07-22</span>
         </div>
-        <h3 class="doc-card__title"><a href="step3-assembly-verification.html">組み立て・検証 — 新板を組み込み、BIOS 起動まで到達</a></h3>
+        <h3 class="doc-card__title"><a href="step3-assembly-verification.html">組み立て・検証 — 新板で起動し、Windows 11 を導入</a></h3>
         <p class="doc-card__desc">
           部品到着直後に旧 OS SSD（CFD PG3VNF）の認識不良が発覚。OS を P310 へ
           クリーンインストールする計画修正、データ救出計画、マザーボード交換手順、
           4 フェーズの動作検証チェックリストをまとめた。7/17 に旧マザーボード取り外し（作業記録①・写真 17 枚）、
-          7/20 に新板組み込み → <strong>BIOS 一発起動</strong>まで到達し、CPU・メモリ 32GB・OS 用 SSD を認識
-          （作業記録②・写真 22 枚）。フェーズ 1 通過。
+          7/20 に新板組み込み → <strong>BIOS 一発起動</strong>（作業記録②・写真 22 枚）、7/22 に
+          <strong>Windows 11 をクリーンインストールしてデスクトップ到達</strong>——ただし
+          <strong>ライセンス認証は OEM 移行不可でリテール版を購入</strong>して解決（作業記録③・写真 25 枚＋図4）。
+          フェーズ 1・2 通過。
         </p>
       </li>
     </ul>
