@@ -18,15 +18,16 @@
 
 <section class="hero">
   <div class="hero__inner">
-    <p class="silk silk--onboard">STEP 3 — LOG 2026-07-16 / 07-17 / 07-20</p>
-    <h1 class="hero__title">組み立て・検証 — 新板を組み込み、BIOS 起動まで到達</h1>
+    <p class="silk silk--onboard">STEP 3 — LOG 2026-07-16 / 07-17 / 07-20 / 07-22</p>
+    <h1 class="hero__title">組み立て・検証 — 新板で起動し、Windows 11 を導入</h1>
     <p class="hero__lead">
       マザーボードとグリスは無事に到着した。ところが交換作業を前に、旧 OS 入り SSD の
       中身を確認しようとしたら認識不良が発覚。搭載計画を「OS は P310 へクリーンインストール、
       旧 SSD はデータ救出対象として隔離」に修正したうえで、交換手順と検証チェックリストをまとめる。
-      7月17日に旧マザーボードの取り外しまで完了し（作業記録①）、<strong>7月20日には新板への組み込みを終えて
-      電源投入——BIOS が一発起動し、CPU・メモリ 32GB・OS 用 SSD をすべて認識した（作業記録②）。</strong>
-      検証チェックリストのフェーズ 1 は実質クリア。次はいよいよ OS 導入へ。
+      7月17日に旧マザーボードの取り外しまで完了し（作業記録①）、7月20日には新板への組み込みを終えて
+      電源投入——BIOS が一発起動し、CPU・メモリ 32GB・OS 用 SSD をすべて認識した（作業記録②）。
+      <strong>さらに7月22日、P310 へ Windows 11 をクリーンインストールしてデスクトップ到達まで完了した（作業記録③）。</strong>
+      検証チェックリストのフェーズ 1・2 を通過——ただしライセンス認証には OEM ならではの壁があった（作業記録③で詳述）。
     </p>
   </div>
 </section>
@@ -660,9 +661,214 @@
       足せば全 9 か所を固定できる。
     </p>
     <p>
-      次はフェーズ 2＝<strong>P310 への Windows 11 クリーンインストール</strong>と
-      Microsoft アカウントでの再認証。続けてフェーズ 3（ドライバ導入と高負荷検証）、
-      フェーズ 4（旧 SSD からのデータ救出）へと進む。
+      次はフェーズ 2＝<strong>P310 への Windows 11 クリーンインストール</strong>——その顛末は
+      次の「作業記録③」へ。ライセンス認証は当初「Microsoft アカウントで再認証」を見込んでいたが、
+      実際には OEM ライセンスの制約でつまずいた（作業記録③で詳述）。続けてフェーズ 3（ドライバ導入と
+      高負荷検証）、フェーズ 4（旧 SSD からのデータ救出）へと進む。
+    </p>
+  </section>
+
+  <section class="section">
+    <h2 class="section__heading">作業記録③ — OS 導入とライセンス認証（2026-07-22 実施）</h2>
+    <p>
+      新板（TUF GAMING B550-PLUS）に組み替えた PC へ、いよいよ Windows 11 を導入する。
+      インストールメディアは別 PC で作った <strong>BUFFALO のポータブル SSD</strong>。周辺機器を
+      すべてつないで電源を入れると、9:37 の POST で全デバイスを認識し、BIOS を通過して
+      Windows 11 セットアップへ——<strong>10:36 にはデスクトップへ到達し、フェーズ 2（OS 導入）を
+      完了した。</strong>ただし途中で<strong>2 つのつまずき</strong>があった。ひとつは
+      <strong>インストール先ディスクの選択エラー</strong>（流用した P310 に旧パーティションが残存）、
+      もうひとつは<strong>ライセンス認証</strong>——ここが今回いちばんの学びで、
+      <strong>OEM ライセンスはマザーボード交換では移行できず、最終的にリテール版 Windows 11 Home を
+      購入して認証</strong>することになった（下の図4）。
+    </p>
+    <ol class="timeline">
+      <li><span class="led led--amber" aria-hidden="true"></span><span class="timeline__state">開始</span>9:19 周辺機器（有線マウス・キーボード・スピーカー・LAN・HDMI）とインストール USB（BUFFALO）を接続して電源投入（写真43・44）</li>
+      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">認識</span>9:37 POST で全デバイスを認識——キーボードも認識（作業記録②の「NO Keyboard Detected」解消）。画面の「<strong>Press F1 to Run SETUP</strong>」に従い <strong>F1</strong> で UEFI へ（写真45・46）</li>
+      <li><span class="led led--amber" aria-hidden="true"></span><span class="timeline__state">対処</span>9:42〜9:45 UEFI（EZ Mode）：ずれていた <strong>BIOS 時計を修正</strong>、表示を<strong>日本語化</strong>、D.O.C.P は Disabled のまま、<strong>起動優先順位＝UEFI OS (BUFFALO)</strong> を確認して保存＆終了（写真47〜49）</li>
+      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>9:49〜9:52 Windows 11 セットアップ：言語（日本語）→「Windows 11 のインストール（すべて削除＝クリーンインストール）」→ プロダクトキー「<strong>ありません</strong>」→ <strong>Windows 11 Home</strong> → ライセンス条項に同意（写真50〜53）</li>
+      <li><span class="led led--red" aria-hidden="true"></span><span class="timeline__state">異常</span>9:53 <strong>★つまずき①：インストール場所の選択でエラー</strong>——流用した P310（ディスク 0）に旧パーティション（MSR＋SSD 931.5GB／EFI システムパーティションなし）が残存していた（写真54・55）</li>
+      <li><span class="led led--amber" aria-hidden="true"></span><span class="timeline__state">対処</span>9:58〜9:59 <strong>ディスク 0 のパーティションを全削除</strong>して未割り当て（931.5GB）に → 解決（Windows が EFI・MSR・主要区画を自動作成）（写真56・57）</li>
+      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>9:59〜10:03 インストール準備完了 → インストール（10%→51%→再起動→「インストール中 33%」）（写真58・59）</li>
+      <li><span class="led led--amber" aria-hidden="true"></span><span class="timeline__state">対処</span>〜10:04 ファイルコピー完了後、インストール USB（BUFFALO）を抜く（写真60）</li>
+      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">完了</span>10:06〜10:32 <strong>OOBE</strong>（Out Of Box Experience＝箱から出して最初に行う Windows の初期設定）：地域＝日本、キーボード＝Microsoft IME、<strong>Microsoft アカウントでサインイン</strong>、PIN 作成、プライバシー設定（必須のみ）（写真61〜63）</li>
+      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">到達</span>10:33〜10:36 PC バックアップ復元は「新しい PC として」、宣伝類はスキップして<strong>デスクトップ到達</strong>。ASUS の Armoury Crate（RGB 管理サービス）は不要のため見送り（写真64・65）</li>
+      <li><span class="led led--red" aria-hidden="true"></span><span class="timeline__state">異常</span>10:58〜11:09 <strong>★つまずき②：ライセンス認証できない</strong>——「リンクされたデバイスが見つかりません」。devices に旧機 <strong>MOUSE6（HN-AX570）</strong> は載るが OEM は移行不可。MS サポート無料相談も不可（写真66・67）</li>
+      <li><span class="led led--green" aria-hidden="true"></span><span class="timeline__state">解決</span><strong>リテール版 Windows 11 Home を購入して認証成功</strong>——以後はマザー交換でも再認証できる（下の図4）</li>
+    </ol>
+
+    <div class="photo-grid">
+      <figure class="figure">
+        <img src="images/step3-os-01-overview-before.jpg" alt="起動前の全景。モニタ・有線キーボード・マウス・スピーカーとケースが机上に並び、周辺機器を接続済み" loading="lazy">
+        <figcaption>写真43：周辺機器を接続して起動前の全景。マウス・キーボード・スピーカー・LAN・HDMI と、インストール USB をつないだ状態から始める。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-os-02-rear-io.jpg" alt="ケース背面 I/O の近接。BUFFALO のポータブル SSD が USB に挿さり、音声端子・LAN ケーブル・HDMI が接続されている" loading="lazy">
+        <figcaption>写真44：背面 I/O。<strong>BUFFALO ポータブル SSD</strong>（Win11 インストールメディア）・有線 LAN・音声・HDMI を接続。BUFFALO は問題なく認識された。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-os-03-tuf-splash.jpg" alt="TUF GAMING のスプラッシュ画面。下部に Please press DEL or F2 to enter UEFI BIOS setting の表示" loading="lazy">
+        <figcaption>写真45：TUF GAMING スプラッシュ。通常は「DEL または F2」で UEFI に入れる、と案内が出る。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-os-04-post-f1.jpg" alt="American Megatrends の POST 画面。CPU・メモリ・M.2・SATA の認識内容と Press F1 to Run SETUP の表示" loading="lazy">
+        <figcaption>写真46：POST 画面。BIOS Rev.3636、Ryzen 7 3700X、32768MB、USB Drive#0 BUFFALO、M.2_1 P310、SATA6G_4 BU40N を認識。新板初回で BIOS 設定がリセット状態のため「<strong>Press F1 to Run SETUP</strong>」——この指示に従い <strong>F1</strong> で UEFI に入った。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-os-05-uefi-english.jpg" alt="UEFI BIOS Utility の EZ Mode（英語表示）。日付は 07/22/2026、時計は 08:44、DRAM は DIMM_A2/B2 に Kingston、D.O.C.P は Disabled" loading="lazy">
+        <figcaption>写真47：UEFI（EZ Mode・英語）。CPU 45℃・MB 32℃、メモリは A2・B2 に 16GB×2、D.O.C.P は Disabled。時計が実時刻より 1 時間遅れていた（08:44 表示）。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-os-06-uefi-japanese.jpg" alt="UEFI EZ Mode を日本語表示に切り替えた画面。時計は 09:44 に修正されている" loading="lazy">
+        <figcaption>写真48：表示を<strong>日本語</strong>に切り替え、<strong>時計も 09:44 に修正</strong>。この 2 つを UEFI 上で済ませておく。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-os-07-boot-uefi.jpg" alt="起動優先順位のクローズアップ。UEFI OS (BUFFALO) が先頭に表示されている" loading="lazy">
+        <figcaption>写真49：<strong>起動優先順位＝UEFI OS (BUFFALO)</strong>。UEFI モードで USB から起動する並びを確認して、保存して終了。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-os-08-setup-language.jpg" alt="Windows 11 セットアップの言語設定を選択画面。日本語（日本）" loading="lazy">
+        <figcaption>写真50：Windows 11 セットアップ開始。言語＝日本語。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-os-09-setup-clean.jpg" alt="セットアップ オプションの選択画面。Windows 11 のインストールを選び、すべてが削除されることに同意にチェック" loading="lazy">
+        <figcaption>写真51：セットアップオプション＝「Windows 11 のインストール」＋「すべて削除に同意」＝<strong>クリーンインストール</strong>を選択。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-os-10-no-key.jpg" alt="プロダクト キーを入力してください画面。下部の「プロダクト キーがありません」を選択" loading="lazy">
+        <figcaption>写真52：プロダクトキーは<strong>「ありません」</strong>で先へ（後でライセンス認証する前提）。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-os-11-select-home.jpg" alt="イメージの選択画面。Windows 11 Home / Education / Pro のうち Home を選択" loading="lazy">
+        <figcaption>写真53：エディションは <strong>Windows 11 Home</strong> を選択（元の構成に合わせる）。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-os-12-disk-before.jpg" alt="インストール場所の選択画面。ディスク0 に MSR とSSD 931.5GB のパーティション、ディスク1 に ESD-USB と未割り当て領域" loading="lazy">
+        <figcaption>写真54：インストール場所の一覧。<strong>ディスク 0（P310）に旧パーティション</strong>（MSR 16MB＋SSD 931.5GB・空き 816GB）が残っている。ディスク 1 はインストール USB（ESD-USB）。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-os-13-partition-error.jpg" alt="インストール場所の選択でエラーダイアログ。インストール用にこのパーティションを選択中にエラーが発生しました" loading="lazy">
+        <figcaption>写真55：<strong>★つまずき①。</strong>「インストール用にこのパーティションを選択中にエラーが発生しました」——EFI システムパーティションを作れる状態でないのが原因。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-os-14-partition-delete.jpg" alt="ディスク0 パーティション1（MSR）を選択し、パーティションの削除を実行しようとしている画面" loading="lazy">
+        <figcaption>写真56：対処——<strong>ディスク 0 のパーティションを削除</strong>していく（MSR も SSD も）。ディスク 1 の USB には手を付けない。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-os-15-disk-unallocated.jpg" alt="ディスク0 全体が未割り当て領域 931.5GB になった画面" loading="lazy">
+        <figcaption>写真57：解決——<strong>ディスク 0 全体が未割り当て（931.5GB）</strong>に。これを選んで次へ進むと、Windows が必要な区画（EFI・MSR・主要）を自動作成する。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-os-16-ready.jpg" alt="インストール準備完了画面。Windows 11 Home をインストール／何も引き継がない、にチェック" loading="lazy">
+        <figcaption>写真58：インストール準備完了（Windows 11 Home／何も引き継がない）。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-os-17-installing.jpg" alt="Windows 11 をインストールしています 51% 完了の画面" loading="lazy">
+        <figcaption>写真59：インストール進行中。10%→51% と進み、再起動をはさんで OOBE へ。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-os-18-remove-usb.jpg" alt="ケース天板の上に置かれた BUFFALO のポータブル SSD。USB から抜いた状態" loading="lazy">
+        <figcaption>写真60：ファイルコピーが終わったら、インストール USB（BUFFALO）を抜く——以降 USB から再起動しないようにするため。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-os-19-region.jpg" alt="OOBE の国または地域はこれでよろしいですか画面。日本を選択" loading="lazy">
+        <figcaption>写真61：OOBE 開始。国/地域＝日本。以降キーボード（Microsoft IME）と続く。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-os-20-msaccount.jpg" alt="Microsoft エクスペリエンスのロックを解除する画面。Microsoft アカウントでサインインを促している" loading="lazy">
+        <figcaption>写真62：<strong>Microsoft アカウントでサインイン</strong>。Windows 11 Home のセットアップはネット接続とアカウントが前提。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-os-21-privacy.jpg" alt="デバイスのプライバシー設定の選択画面。診断データは必須のみ、手書き・パーソナライズはいいえ" loading="lazy">
+        <figcaption>写真63：プライバシー設定は「必須のみ」中心にして承諾。PIN も作成する。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-os-22-restore.jpg" alt="PC バックアップからの復元を勧める画面。ユーザー名はぼかし加工、別デバイス L390 のバックアップが表示されている" loading="lazy">
+        <figcaption>写真64：PC バックアップの復元案内（ユーザー名はぼかし）。今回は<strong>「新しい PC として」</strong>セットアップした。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-os-23-desktop.jpg" alt="デスクトップ到達。スタートメニューが開いており、右下に Armoury Crate のダウンロード案内。アカウント名はぼかし加工" loading="lazy">
+        <figcaption>写真65：<strong>デスクトップ到達（10:36）。</strong>スタートメニュー左下のアカウント名はぼかし。右の ASUS「Armoury Crate」導入案内は不要のため見送った。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-os-24-activation-failed.png" alt="Windows をライセンス認証できませんのダイアログ。リンクされたデバイスが見つからないという内容" loading="lazy">
+        <figcaption>写真66：<strong>★つまずき②。</strong>「Windows をライセンス認証できません——リンクされているデバイスが見つかりません」。ハードウェア変更による再認証が通らない。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/step3-os-25-devices.png" alt="Microsoft アカウントの devices ページ。旧機 MOUSE6（HN-AX570）と新機 TUF-GAMING8 が並ぶ。旧機のシリアルはぼかし加工" loading="lazy">
+        <figcaption>写真67：account.microsoft.com/devices。旧機 <strong>MOUSE6（HN-AX570）</strong>は載っている（シリアルはぼかし）が、OEM ライセンスはこの新機へ移行できなかった。</figcaption>
+      </figure>
+    </div>
+
+    <p class="note">
+      <strong>気づき（教訓）：</strong>
+      ① <strong>UEFI へは F1</strong>——新板の初回は BIOS 設定がリセット状態のため「Press F1 to Run SETUP」が出る（DEL/F2 でも入れる）。
+      ② <strong>流用ドライブは残存パーティションに注意</strong>——インストール先でエラーが出たら、そのディスクを
+      <strong>全削除して未割り当て</strong>にすれば、Windows が起動に必要な区画を作り直す（今回の P310 が該当）。
+      ③ <strong>ライセンスの落とし穴</strong>——OEM プリインストール機のライセンスはマザーボードに紐づき、
+      <strong>マザー交換では移行できない</strong>（下の図4）。当初計画の「Microsoft アカウントで再認証」は誤りだった。
+      ④ インストールメディアは <strong>BUFFALO のポータブル SSD</strong> で問題なく認識できた。
+    </p>
+
+    <figure class="figure">
+      <svg viewBox="0 0 760 470" role="img" aria-label="ライセンス認証の図。OEM プリインストール版のライセンスはマザーボードに紐づくため、マザーボード交換では移行できない。Microsoft アカウントでの再認証や無料サポートでも認証できず、最終的にリテール版 Windows 11 Home を購入して認証に成功した。リテール版は以後マザーボードを交換しても再認証できる。">
+        <text x="16" y="26" class="svg-silk" font-size="11" fill="#b4632c">図4：Windows ライセンスの移行 ― OEM は不可、リテール版で解決</text>
+
+        <!-- 上段：OEM → 移行不可 -->
+        <rect x="16" y="44" width="336" height="76" rx="4" fill="#143528"/>
+        <text x="32" y="70" class="svg-silk" font-size="10" fill="#d9a06b">OEM プリインストール（メーカー製 PC 付属）</text>
+        <text x="32" y="92" font-size="14" fill="#e9efe9">購入時 Win10 → 11 へ無償アップグレード</text>
+        <text x="32" y="112" class="svg-silk" font-size="10" fill="#d9a06b">ライセンスは「マザーボード」に紐づく</text>
+
+        <line x1="352" y1="82" x2="418" y2="82" stroke="#e5484d" stroke-width="3"/>
+        <path d="M 418 82 L 406 76 L 406 88 Z" fill="#e5484d"/>
+        <text x="356" y="74" class="svg-silk" font-size="10" fill="#e5484d">マザー交換</text>
+
+        <rect x="424" y="44" width="320" height="76" rx="4" fill="#ffffff" stroke="#e5484d" stroke-width="2.5"/>
+        <text x="444" y="80" font-size="15" fill="#20241f">別 PC 扱い → 移行不可（×）</text>
+        <text x="444" y="102" class="svg-silk" font-size="10" fill="#e5484d">クリーンインストール後、認証が通らない</text>
+
+        <!-- 中段：試して失敗 -->
+        <rect x="16" y="140" width="728" height="88" rx="4" fill="#fdf6e7" stroke="#eba117" stroke-width="1.5"/>
+        <text x="32" y="166" class="svg-silk" font-size="10" fill="#b4632c">試したが認証できなかったこと</text>
+        <circle cx="42" cy="189" r="4" fill="#e5484d"/>
+        <text x="56" y="194" font-size="13" fill="#20241f">Microsoft アカウントで再認証（「ハードウェアを最近変更しました」）― リンク先のデバイスなし</text>
+        <circle cx="42" cy="212" r="4" fill="#e5484d"/>
+        <text x="56" y="217" font-size="13" fill="#20241f">devices に旧機 MOUSE6 は表示されるが OEM は移行不可／Microsoft サポート無料相談も不可</text>
+
+        <!-- 下段：解決 -->
+        <line x1="380" y1="228" x2="380" y2="260" stroke="#2f9e63" stroke-width="3"/>
+        <path d="M 380 260 L 374 248 L 386 248 Z" fill="#2f9e63"/>
+        <rect x="16" y="264" width="728" height="80" rx="4" fill="#143528"/>
+        <circle cx="42" cy="304" r="6" fill="#2f9e63"/>
+        <text x="58" y="298" font-size="15" fill="#e9efe9">解決：リテール版 Windows 11 Home を購入 → プロダクトキーで認証成功</text>
+        <text x="58" y="324" class="svg-silk" font-size="10" fill="#8fc7a6">リテール版は Microsoft アカウント紐付けのデジタルライセンス＝今後マザーを替えても再認証できる</text>
+
+        <!-- 教訓 -->
+        <rect x="16" y="368" width="728" height="82" rx="4" fill="#ffffff" stroke="#b4632c" stroke-width="2"/>
+        <text x="32" y="394" class="svg-silk" font-size="10" fill="#b4632c">教訓</text>
+        <text x="32" y="416" font-size="13" fill="#20241f">OEM 版（メーカー製 PC 付属のライセンス）はマザーボードに固定。マザー交換で延命するなら、</text>
+        <text x="32" y="436" font-size="13" fill="#20241f">最初から「リテール版の購入が要るかもしれない」と見込んでおく。</text>
+      </svg>
+      <figcaption>
+        図4：Windows ライセンスの移行（オリジナルの模式図）。OEM プリインストール版はマザーボードに
+        紐づくためマザー交換で移行できず、Microsoft アカウント再認証も無料サポートも不可。
+        <strong>リテール版 Windows 11 Home を購入して認証</strong>し、以後はマザー交換でも再認証できる形にした。
+      </figcaption>
+    </figure>
+
+    <p class="note">
+      <strong>その後（ドライバとアカウント）：</strong>デスクトップ到達後、GPU は NVIDIA の
+      <strong>「グラフィックスドライバーのみ」</strong>（NVIDIA App は入れない）、AMD の
+      <strong>チップセットドライバ</strong>を導入した。デバイスマネージャーに黄色い「！」は出ていない。
+      仕上げに、ユーザーフォルダ名を旧 PC と同じにするため——Microsoft アカウントで作成すると
+      フォルダ名がメールアドレスの先頭になり、<strong>既存フォルダのリネームもできない</strong>——
+      希望名で<strong>ローカルアカウントを新規作成して切り替えた</strong>（旧 Microsoft アカウントは正規手順で削除）。
+    </p>
+    <p>
+      これでフェーズ 2（OS 導入）は完了。次は<strong>フェーズ 3c＝安定性検証</strong>——HWiNFO で温度を
+      監視しつつ、Steam を入れ直して<strong>発端のゲームを 1〜2 時間</strong>プレイし、暗転・再起動が
+      再発しないかを確かめる。ここを通れば本プロジェクトの完了条件を満たす。続けてフェーズ 4（旧 SSD の
+      データ救出）へ。
     </p>
   </section>
 
@@ -680,7 +886,7 @@
         </tr>
         <tr>
           <th>フェーズ 2<br>OS 導入</th>
-          <td>インストール USB から起動 → Windows 11 Home をクリーンインストール（プロダクトキーは「ありません」でスキップ）→ Microsoft アカウントでサインイン → 設定 → システム → ライセンス認証で「<strong>ハードウェアを最近変更しました</strong>」から再認証（詳細手順は <a href="step2-parts-procurement.html">step2</a>）</td>
+          <td><span class="led led--green" aria-hidden="true"></span><strong>2026-07-22 通過（作業記録③）。</strong>インストール USB（BUFFALO）から起動 → Windows 11 Home をクリーンインストール（インストール先は P310 の旧パーティションを全削除して解決）→ OOBE。<strong>ライセンス認証は当初「Microsoft アカウントで再認証」を見込んでいたが、OEM ライセンスはマザー交換で移行できず不可 → リテール版 Windows 11 Home を購入して認証成功</strong>（顛末は上の作業記録③・図4）。あわせて GPU／チップセットドライバを導入し、ローカルアカウントへ切り替えた</td>
         </tr>
         <tr>
           <th>フェーズ 3<br>安定性検証</th>
